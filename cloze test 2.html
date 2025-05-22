@@ -1,0 +1,437 @@
+<html>
+
+<head>
+
+    <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1">
+
+    <div>
+        <h1 class="title">クローズテスト L8</h1>
+    </div>
+
+
+</head>
+
+
+<style>
+    /*    head   //////////////////////////////////// */
+
+    .title {
+        font-size: 4rem;
+        text-align: center;
+    }
+
+    .list_li {
+        display: block;
+        padding: 1rem 3rem;
+    }
+
+    .list {
+        border-right: 0.1rem solid #cccccc;
+
+    }
+
+    .list_ui {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        border-left: 0.1rem solid #cccccc;
+    }
+
+    /*      cloze              ////////////////////////////////// */
+
+    .c_kaito_bo {
+        width: 10rem;
+        height: 3rem;
+        font-size: 1.2rem;
+    }
+
+    .c_bun {
+        text-align: center;
+        font-size: 1.4rem;
+        padding: 0rem 4rem 0rem;
+    }
+
+    .c_part_bo {
+        width: 10rem;
+        height: 3rem;
+        font-size: 1.5rem;
+        margin-right: 2rem !important;
+    }
+
+    /*        スマホ     ///////////////////////////////////////////////////////////////////////////////*/
+
+    @media screen and (max-width:480px) {
+
+        /*    head   /////////////////////////// */
+
+        .list_li {
+            display: block;
+            padding: 0.5rem 1.5rem;
+            font-size: 1rem;
+        }
+
+        .list {
+            border-right: 0.1rem solid #cccccc;
+
+        }
+
+        .list_ui {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            border-left: 0.1rem solid #cccccc;
+        }
+
+        .title {
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        /*      cloze              ////////////////////////////////// */
+
+        .c_kaito_bo {
+            width: 3.5rem;
+            height: 1.2rem;
+            font-size: 0.6rem;
+        }
+
+        .c_bun {
+            text-align: center;
+            font-size: 0.8rem;
+            padding: 0rem;
+        }
+
+        .c_part_bo {
+            width: 5rem;
+            height: 1.5rem;
+            font-size: 1rem;
+            margin-right: 1rem;
+        }
+
+    }
+</style>
+
+<body>
+
+
+
+    <h3 id="subtitle" style="text-align:center"></h3>
+
+    <!-- <div style="display: flex; justify-content: right;margin-bottom: 2rem;">
+        <input type="button" value="プログラムの説明" onclick="location.href='c_s.html'">
+    </div> -->
+
+    <div style="text-align: center;justify-content: center;display: flex;">
+        <input type="button" value="part1" class="c_part_bo" onclick="reset(),cloze(0)">
+        <input type="button" value="part2" class="c_part_bo" onclick="reset(),cloze(1)">
+        <input type="button" value="part3" class="c_part_bo" onclick="reset(),cloze(2)">
+        <input type="button" value="part4" class="c_part_bo" onclick="reset(),cloze(3)">
+    </div>
+    <p class="c_bun" id=h22></p>
+
+    <table cellpadding="3rem" style="margin:auto;text-align: center;">
+        <tr>
+            <td><input id="1" type="button" value="1" onclick="alertButton(this.id)" class="c_kaito_bo"></td>
+            <td><input id="2" type="button" value="2" onclick="alertButton(this.id)" class="c_kaito_bo"></td>
+            <td><input id="3" type="button" value="3" onclick="alertButton(this.id)" class="c_kaito_bo"></td>
+            <td><input id="4" type="button" value="4" onclick="alertButton(this.id)" class="c_kaito_bo"></td>
+            <td><input id="5" type="button" value="5" onclick="alertButton(this.id)" class="c_kaito_bo"></td>
+        </tr>
+        <tr>
+            <td><input id="6" type="button" value="6" onclick="alertButton(this.id)" class="c_kaito_bo"></td>
+            <td><input id="7" type="button" value="7" onclick="alertButton(this.id)" class="c_kaito_bo"></td>
+            <td><input id="8" type="button" value="8" onclick="alertButton(this.id)" class="c_kaito_bo"></td>
+            <td><input id="9" type="button" value="9" onclick="alertButton(this.id)" class="c_kaito_bo"></td>
+            <td><input id="10" type="button" value="10" onclick="alertButton(this.id)" class="c_kaito_bo"></td>
+        </tr>
+    </table>
+
+    <div style="text-align: center;margin: 2rem;">
+        <input type="button" value="もう一度" onclick="tugi()" class="c_kaito_bo">
+    </div>
+
+    <script>
+        var bun = new Array(3)
+        var word
+        var word_size
+        var Question = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        var answer = ["", "", "", "", "", "", "", "", "", ""]
+        var sr
+        var sentence = " "
+        var bid
+        var part = 0
+
+        bun[0] = "There is no bigger industry on our planet than food and agriculture, with seven billion customers. In fact, the World Bank estimates that food and agriculture comprise about 10% of the global GDP. On the food front, a record $1.71 trillion was spent in 2018 on food and drinks at stores and away-from-home meals and snacks in the United States alone. During the same year, 9.7% of Americans personal income was spent on food-5% at home and 4.7% away from home a percentage that has remained about the same during economic changes over the past 20 years. However, despite this large demand, the food industry is facing challenges with production because of the demand coming from consumer trends. Consumer demands and focus have changed in recent years. An increasing focus by consumers on sustainability, health, and freshness has placed significant pressure on the food industry to change. In recent years, agricultural technology or agtech innovators have created exciting new ways to use the power of technology to enhance the worlds food supply. Agtech innovations are protecting and increasing crops enabling changes in the agriculture system that could achieve the important sustainability goals of lowering greenhouse gases, reducing water use, and reducing deforestation."
+        bun[1] = "Food tech, or technology that concerns food, is improving food consumption and decreasing waste a key to decreasing the environmental problems for a growing human population. Recognizing this huge opportunity, venture capitalists are closely tracking this situation. Data show that money spent on food tech sharply increased from about $60 million in 2008 to more than $1 billion in 2015. Consumers are paying more attention to what they eat. They are very busy and demand convenience when it comes to their meals, but this convenience cannot come at the expense of quality. Now more than ever, people want to know what is in their food, where it comes from, and how its production influences the environment. In years past, companies of consumer packaged goods (CPG) tried to satisfy growing demands for convenient, superior-quality food. However, falling profits prevented them from continuing these efforts, and many have refocused their attention. This has left the door open for a new wave of hungry startups. There are three key areas in which food tech innovations are beginning to deliver completely new and novel approaches. These new technological approaches are addressing serious problems within the food industry, and it is anticipated that these fields will experience significant growth in the coming years. The first is consumer food tech. This area focuses on the development of food technologies marketed toward the consumer. Whether it is plant-based meats, new distribution systems, or nutrition-based tech, the goal is to satisfy consumer demands. Consumer food tech includes alternative protein and dairy, nutritional supplements, and delivered meal kits."
+        bun[2] = "Fast food giants are now offering meatless burgers on their menus, but it doesn't end there. Other companies are working on alternative proteins and are developing milk alternatives that are dairy- and nut-free. They are seeking ways to produce food and nutritional supplements in cleaner, smarter, and more sustainable ways. The second key area is industrial food tech. Some companies are focusing on the food itself, while others are working on how to process, package, and deliver sustainable, healthy, and innovative food. Industrial food tech is the part of food tech that focuses on addressing the fundamental business models within the food industry. These companies include innovators in novel processing and packaging technology. In addition, food preservation technology companies are leading the way in reducing food waste while improving transportation techniques for better quality produce. This is a massive issue for innovation, as pre-consumer food waste is 40% of all food wasted in the US. Improved food-waste management could enable an overall decrease of the land needed for growing crops. Food processing technologies will also play a leading role in this field; for example, food inspection startups are receiving financial support to develop food quality and foreign object detection technology. This technology has the potential not only to provide food-safety improvements in automated foreign object detection, but also to enable meat quality grading to be standardized and improved over time."
+        bun[3] = "The third key area is supply chains. Food contamination incidents emphasize the importance of improving visibility in food supply chains. Some companies are helping to increase food traceability by making new methods of tracking where food comes from. Consumers are also demanding more information about the origin of the food they buy. This has created a strong need for innovation in the food supply chain to satisfy these demands. At the same time, changing consumer preferences for convenient, high-quality food service has led to a rise in the category of fast-casual restaurants. This has put pressure on fast food restaurants to rethink their delivery models. Such a new delivery model can be found in companies which sell chef-made meals and snacks in vending machines or automated convenience stores. Another is a company that uses Al and machine learning to prepare healthy food. Others have introduced robots that deliver food from restaurants and local stores. Innovators in the food supply chain are also focused on traceability, sustainability, improving freshness, and stopping food waste. For example, there are companies which deliver fresh food in reusable packaging, while another encourages companies in the food supply chain to shop ugly by using imperfect or surplus produce that would have otherwise gone to waste. Food tech will continue to play an increasingly critical role in how the food we eat is produced, how it is packaged, how it is delivered, how it tastes, and how resources are reused. It is hoped that food tech will help to increase the delivery of healthier, more sustainable food systems for the world. After all, we are what we eat."
+
+
+        const isNumberString = n => typeof n === "string" && n !== "" && !isNaN(n);
+
+        const isLowerCase = str => {
+            const arr = str.match(/^[a-z]+$/)
+            return arr ? true : false
+        }
+
+        const isUpperCase = str => {
+            const arr = str.match(/^[A-Z]+$/)
+            return arr ? true : false
+        }
+
+        function compareFunc(a, b) {
+            return a - b;
+        }
+
+        function alertButton(bid) {
+            var bel
+
+            for (let i = 1; i < 11; i++) {
+                if (bid == i) {
+                    bel = document.getElementById(i)
+                    bel.value = answer[bid - 1]
+                }
+                else { }
+            }
+        }
+
+        function cloze(num) {
+
+            part = num
+
+            ///////////////lesson number            document.getElementById("subtitle").textContent = "8-" + (num + 1)
+            word = bun[num].split(" ")
+            word_size = word.length
+
+            //ランダム
+            for (let i = 0; i < 10; i++) {
+
+                Question[i] = Math.floor(Math.random() * word_size)
+
+                for (let ii = 0; ii < 10; ii++) {
+                    if (Question[i] == Question[ii]) {
+                        if (i != ii) {
+                            i--;
+                            break;
+                        } else {
+                            continue;
+                        }
+                    }
+                }
+
+                //iが-1になった時用
+                if (i < 0) {
+                    i = 0
+                    continue
+                }
+
+                if (!isNaN(word[Question[i]].slice(0, 1))) {
+                    i--;
+                    continue;
+                }
+                if (isUpperCase(word[Question[i]].slice(0, 1))) {
+
+                    //Question_numberが0のとき
+                    if (Question[i] == 0) {
+                        i--;
+                        continue
+                    }
+
+                    //　　　　数字か　　　　　　　その単語の後ろの文字
+                    else if (!isNaN(word[Question[i] - 1].slice(- 1))) {
+                        i--;
+                        continue
+                    }
+                    //oomozi   
+                    if (isUpperCase(word[Question[i] - 1].slice(- 1))) {
+                        i--;
+                        continue;
+                    }
+                    //komozi   
+                    if (isLowerCase(word[Question[i] - 1].slice(- 1))) {
+                        i--;
+                        continue;
+                    }
+                }
+                //その他
+                if (word[Question[i]] == "a") {
+                    i--;
+                } else if (word[Question[i]] == "the") {
+                    i--;
+                } else if (word[Question[i]] == "he") {
+                    i--;
+                } else if (word[Question[i]] == "she") {
+                    i--;
+                } else if (word[Question[i]] == "they") {
+                    i--;
+                } else if (word[Question[i]] == "you") {
+                    i--;
+                } else if (word[Question[i]] == "we") {
+                    i--;
+                } else if (word[Question[i]] == "He") {
+                    i--;
+                } else if (word[Question[i]] == "She") {
+                    i--;
+                } else if (word[Question[i]] == "I") {
+                    i--;
+                } else if (word[Question[i]] == "They") {
+                    i--;
+                } else if (word[Question[i]] == "You") {
+                    i--;
+                } else if (word[Question[i]] == "We") {
+                    i--;
+                } else if (word[Question[i]] == "A") {
+                    i--;
+                } else if (word[Question[i]] == "The") {
+                    i--;
+                }
+            }
+
+            Question.sort(compareFunc);
+
+            //出力
+            for (let i = 0; i < word_size; i++) {
+
+                //初期化
+                hit = false;
+
+                for (let ii = 0; ii < 10; ii++) {
+
+                    //問題の場合
+                    if (i == Question[ii]) {
+
+                        //問題の記録
+                        hit = true;
+
+                        //
+                        if (word[i].slice(0, 1) == '\"') {
+                            //."
+
+                            if (word[i].slice())
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                answer[ii] = word[i].substring(1);
+                            sentence = sentence.concat("\"(" + (ii + 1) + ") ");
+                            break;
+                        }
+                        //後ろが” word[i].slice(word[i].length-1,1)
+                        else if (word[i].slice(- 1) == '\"') {
+                            //.
+                            if (word[i].slice(-2, -1) == '.') {
+                                answer[ii] = word[i].substring(0, word[i].length - 2);
+                                sentence = sentence.concat("(" + (ii + 1) + ").\" ");
+                                break;
+                            }
+                            //!
+                            else if (word[i].slice(-2, -1) == '!') {
+                                answer[ii] = word[i].substring(0, word[i].length - 2);
+                                sentence = sentence.concat("(" + (ii + 1) + ")!\" ");
+                                break;
+                            }
+                            //?
+                            else if (word[i].slice(-2, -1) == '?') {
+                                answer[ii] = word[i].substring(0, word[i].length - 2);
+                                sentence = sentence.concat("(" + (ii + 1) + ")?\" ");
+                                break;
+
+                            }
+                            //"だけ
+                            else {
+                                answer[ii] = word[i].substring(0, word[i].length - 1);
+                                sentence = sentence.concat("(" + (ii + 1) + ")\" ");
+                                break;
+                            }
+
+                        }
+                        //後ろが.
+                        else if (word[i].slice(- 1) == '.') {
+                            answer[ii] = word[i].substring(0, word[i].length - 1);
+                            sentence = sentence.concat("(" + (ii + 1) + "). ");
+                            break;
+
+                        }
+                        //後ろが!
+                        else if (word[i].slice(- 1) == '!') {
+                            answer[ii] = word[i].substring(0, word[i].length - 1);
+                            sentence = sentence.concat("(" + (ii + 1) + ")! ");
+                            break;
+                        }
+                        //後ろが?
+                        else if (word[i].slice(- 1) == '?') {
+                            answer[ii] = word[i].substring(0, word[i].length - 1);
+                            sentence = sentence.concat("(" + (ii + 1) + ")? ");
+                            break;
+                        }
+                        //後ろが,
+                        else if (word[i].slice(- 1) == ',') {
+                            answer[ii] = word[i].substring(0, word[i].length - 1);
+                            sentence = sentence.concat("(" + (ii + 1) + "), ");
+                            break;
+                        }
+                        //なし
+                        else {
+                            answer[ii] = word[i];
+                            sentence = sentence.concat("(" + (ii + 1) + ") ");
+                            break;
+                        }
+
+                    }
+                }
+
+                //普通の場合
+                if (hit == false) {
+                    sentence = sentence + word[i] + " ";
+                }
+            }
+
+            document.getElementById('h22').textContent = sentence;
+        }
+
+        function reset() {
+            sentence = ""
+
+            for (let i = 1; i < 11; i++) {
+                document.getElementById(i).value = i
+            }
+        }
+
+        function tugi() {
+            reset()
+            cloze(part)
+        }
+
+
+        cloze(0)
+
+
+        //記号と単語を分けるときの処理が複雑である。
+        //全て1つの関数に入れる
+        //
+        //手順
+        //単語の0番目、ｎ－１番目の文字が英語か判定
+        //記号だったら、その記号を検出、弾く
+        //iosのファイル読み込みについて
+
+
+
+        function cut() {
+
+        }
+    </script>
+
+</body>
+
+</html>

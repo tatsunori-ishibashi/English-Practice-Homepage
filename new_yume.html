@@ -1,0 +1,2599 @@
+<html>
+
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1">
+
+    <h1 class="title">ユメタン</h1>
+</head>
+
+<body>
+    <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1">
+
+    <div style="background-color: aqua;" id="form">
+        <fieldset>
+            <div style="display: flex;margin-top: 1rem;margin-bottom: 1rem;">
+                <label><input type="radio" id="yon" name="r1">四択問題　</label>
+                <label><input type="radio" name="r1" checked>一問一答　</label>
+            </div>
+        </fieldset>
+        <fieldset>
+            <div style="display: flex;margin-top: 1rem;margin-bottom: 1rem;">
+                <label><input type="radio" id="einiti" name="r2" checked>英→日　</label>
+                <label><input type="radio" name="r2">日→英　</label>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <div style="display: flex;margin-top: 1rem;margin-bottom: 1rem;">
+                <label><input type="radio" id="aka" name="r4" checked>赤　</label>
+                <label><input type="radio" name="r4">青　</label>
+                <select id="select" class="select">
+                    <option>全範囲</option>
+                    <option>1~100</option>
+                    <option>101~200</option>
+                    <option>201~300</option>
+                    <option>301~400</option>
+                    <option>401~500</option>
+                    <option>501~600</option>
+                    <option>601~700</option>
+                    <option>701~800</option>
+                    <option>801~900</option>
+                    <option>901~1000</option>
+                </select>
+            </div>
+        </fieldset>
+    </div>
+
+    <div style="text-align: center;margin-top: 1rem;" id="sbo">
+        <input type="button" value="スタート" onclick="kaku(),reset1(),start(),main()">
+    </div>
+
+    <div>
+        <div class="div_bo_con">
+            <input type="button" value="戻る" class="bo_con" onclick="reset()" id="back" hidden>
+            <label class="bo_con" id="meter" hidden>0/1000</label>
+        </div>
+        <div style="text-align: center;">
+            <label class="qtext" id="qtext" hidden>wwwwwwwwww</label>
+        </div>
+        <div>
+            <table cellpadding="8rem" style="margin:auto;text-align: center;" id="table" hidden>
+                <tr>
+                    <td><input id="0" type="button" class="qbo" value="a0" onclick="qbc(this.id)"></td>
+                    <td><input id="1" type="button" class="qbo" value="a1" onclick="qbc(this.id)"></td>
+                </tr>
+                <tr>
+                    <td><input id="2" type="button" class="qbo" value="a2" onclick="qbc(this.id)"></td>
+                    <td><input id="3" type="button" class="qbo" value="a3" onclick="qbc(this.id)"></td>
+                </tr>
+
+            </table>
+        </div>
+        <div style="height: 3rem;" id="aida" hidden>
+        </div>
+        <div style="margin: 1rem;display: flex;justify-content: space-around;">
+            <input type="button" value="覚えた" class="next" id="yi1" onclick="iti(this.id)" hidden>
+            <input type="button" value="次へ" id="nextbo" class="next" onclick="next()" hidden>
+            <input type="button" value="わからん" class="next" id="yi2" onclick="iti(this.id)" hidden>
+
+        </div>
+        <div style="text-align: center;margin: 1rem;">
+            <label class="qtext" id="kuria" hidden>クリア</label>
+        </div>
+        <div style="margin: 1rem;display: flex;justify-content: space-around;">
+            <input type="button" value="もう一度" class="next" id="endb" onclick="start(),main()" hidden>
+            <input type="button" value="ホームへ" class="next" id="endb2" onclick="reset()" hidden>
+        </div>
+    </div>
+
+</body>
+
+<style>
+    /*    head   //////////////////////////////////// */
+
+    .title {
+        font-size: 4rem;
+        text-align: center;
+    }
+
+    .list_li {
+        display: block;
+        padding: 1rem 3rem;
+    }
+
+    .list {
+        border-right: 0.1rem solid #cccccc;
+
+    }
+
+    .list_ui {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        border-left: 0.1rem solid #cccccc;
+    }
+
+    .div_bo_con {
+        justify-content: space-between;
+        display: flex;
+        margin: 1rem;
+    }
+
+    .bo_con {
+        width: 10rem;
+        height: 3rem;
+        font-size: 1.5rem;
+    }
+
+    .qtext {
+        text-align: center;
+        font-size: 3rem;
+        margin: 1rem;
+    }
+
+    .qbo {
+        width: 20rem;
+        height: 4rem;
+        font-size: 1.5rem;
+    }
+
+    .next {
+        width: 10rem;
+        height: 3rem;
+        font-size: 1.5rem;
+    }
+
+    @media screen and (max-width:480px) {
+
+        /*    head   /////////////////////////// */
+
+        .list_li {
+            display: block;
+            padding: 0.5rem 1.5rem;
+            font-size: 1rem;
+        }
+
+        .list {
+            border-right: 0.1rem solid #cccccc;
+
+        }
+
+        .list_ui {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            border-left: 0.1rem solid #cccccc;
+        }
+
+        .title {
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        .bo_con {
+            width: 5rem;
+            height: 1.6rem;
+            font-size: 1rem;
+        }
+
+        .div_bo_con {
+            justify-content: space-between;
+            display: flex;
+            margin: 1rem;
+        }
+
+        .qtext {
+            text-align: center;
+            font-size: 2rem;
+            margin: 0rem;
+        }
+
+        .qbo {
+            width: 9rem;
+            height: 2rem;
+            font-size: 0.7rem;
+        }
+
+        .next {
+            width: 5rem;
+            height: 1.5rem;
+            font-size: 0.8rem;
+        }
+    }
+</style>
+
+<script>
+    //意味　スペル　品詞　unit
+    //名詞：０　動詞：１　形容詞：２
+
+    var yume0 = "接近方法 access 0 1 \
+慣れた accustomed 2 1 \
+~を加える add 1 1 \
+適した adequate 2 1 \
+事柄 affair 0 1 \
+似ている alike 2 1 \
+生きて alive 2 1 \
+年1回の annual 2 1 \
+食欲 appetite 0 1 \
+建築 architecture 0 1 \
+利用できる available 2 1 \
+裸の bare 2 1 \
+打ち解けた casual 2 1 \
+~を励ます cheer 1 1 \
+~を伝達する communicate 1 1 \
+状況 condition 0 1 \
+気づいている conscious 2 1 \
+~を消費する consume 1 1 \
+便利な convenient 2 1 \
+~を数える count 1 1 \
+夜明け dawn 0 1 \
+腐る decay 1 1 \
+~を飾る decorate 1 1 \
+対話 dialogue 0 1 \
+飲食物 diet 0 1 \
+~を展示する display 1 1 \
+遠い distant 2 1 \
+異なった distinct 2 1 \
+離婚 divorce 0 1 \
+家庭の domestic 2 1 \
+しきりにしたがって eager 2 1 \
+努力 effort 0 1 \
+~を見積もる estimate 1 1 \
+正確な exact 2 1 \
+叫ぶ exclaim 1 1 \
+よく知られた familiar 2 1 \
+~に食べ物を与える feed 1 1 \
+財政 finance 0 1 \
+~を修理する fix 1 1 \
+風味 flavor 0 1 \
+運 fortune 0 1 \
+たびたび起こる frequent 2 1 \
+葬式 funeral 0 1 \
+さらなる further 2 1 \
+一見 glance 0 1 \
+等級 grade 0 1 \
+習慣 habit 0 1 \
+~をつるす hang 1 1 \
+出来事 incident 0 1 \
+避けられない inevitable 2 1 \
+~に知らせる inform 1 1 \
+指示 instruction 0 1 \
+道具 instrument 0 1 \
+続く last 1 1 \
+横たわる lie 2 1 \
+ありそうな likely 2 1 \
+緩い loose 2 1 \
+大多数 majority 0 1 \
+手段 means 0 1 \
+薬 medicine 0 1 \
+うたた寝 nap 0 1 \
+ありふれた ordinary 2 1 \
+政治 politics 0 1 \
+~を持つ possess 1 1 \
+~を延期する postpone 1 1 \
+~をつぐ pour 1 1 \
+高価な precious 2 1 \
+~の用意をする prepare 1 1 \
+私的な private 2 1 \
+職業 profession 0 1 \
+~を保護する protect 1 1 \
+~を購入する purchase 1 1 \
+及んでいる range 2 1 \
+割合 rate 0 1 \
+~を減らす reduce 1 1 \
+~を賃借りする rent 1 1 \
+返事する reply 1 1 \
+上がる rise 1 1 \
+役割 role 0 1 \
+ざらざらした rough 2 1 \
+~をつかむ seize 1 1 \
+~を縫う sew 1 1 \
+不足 shortage 0 1 \
+わずかな slight 2 1 \
+予備の spare 2 1 \
+~をこぼす spill 1 1 \
+じっと見つめる stare 2 1 \
+~を蓄える store 1 1 \
+物 stuff 0 1 \
+主題 subject 0 1 \
+十分な sufficient 2 1 \
+供給 supply 0 1 \
+引き渡し surrender 0 1 \
+~を味わう taste 1 1 \
+ごみ trash 0 1 \
+心配 trouble 0 1 \
+無駄な vain 2 1 \
+~をふく wipe 1 1 \
+~かなと思う wonder 1 1 \
+価値がある worth 2 1 \
+~を廃止する abolish 1 2 \
+預金口座 account 0 2 \
+政治 administration 0 2 \
+農業 agriculture 0 2 \
+二者択一の alternative 2 2 \
+大使 ambassador 0 2 \
+~を発表する announce 1 2 \
+~を試みる attempt 1 2 \
+利益 benefit 0 2 \
+境界 border 0 2 \
+内閣 cabinet 0 2 \
+候補者 candidate 0 2 \
+~の原因となる cause 1 2 \
+料金 charge 0 2 \
+市民の civil 2 2 \
+共通の common 2 2 \
+込み入った complicated 2 2 \
+~に関係する concern 1 2 \
+会議 conference 0 2 \
+~を確認する confirm 1 2 \
+法人 corporation 0 2 \
+~を押しつぶす crush 1 2 \
+借金 debt 0 2 \
+~を要求する demand 1 2 \
+民主主義 democracy 0 2 \
+~を解雇する dismiss 1 2 \
+当然支払われるべき due 2 2 \
+職務 duty 0 2 \
+経済の economic 2 2 \
+選挙 election 0 2 \
+~を豊かにする enrich 1 2 \
+全体の entire 2 2 \
+逃げる escape 1 2 \
+~を設立する establish 1 2 \
+費用 expense 0 2 \
+爆発する explode 1 2 \
+~を延期する extend 1 2 \
+財政上の financial 2 2 \
+会社 firm 0 2 \
+~を得る gain 1 2 \
+保障 guarantee 0 2 \
+危険 hazard 0 2 \
+相続人 heir 0 2 \
+即座の immediate 2 2 \
+収入 income 0 2 \
+産業 industry 0 2 \
+劣った inferior 2 2 \
+保険 insurance 0 2 \
+強烈な intense 2 2 \
+~を防げる interrupt 1 2 \
+~を含む involve 1 2 \
+遺産 legacy 0 2 \
+大きいほうの major 2 2 \
+軍隊 military 0 2 \
+小さいほうの minor 2 2 \
+少数派 minority 0 2 \
+非常に小さい minute 2 2 \
+交渉 negotiation 0 2 \
+不明瞭な obscure 2 2 \
+~を提供する offer 1 2 \
+役人 officer 0 2 \
+公の official 2 2 \
+特許 patent 0 2 \
+年金 pension 0 2 \
+永続する permanent 2 2 \
+~を許す permit 1 2 \
+人口 population 0 2 \
+第1位の primary 2 2 \
+ふさわしい proper 2 2 \
+割合 proportion 0 2 \
+~を立証する prove 1 2 \
+~に与える provide 1 2 \
+目的 purpose 0 2 \
+~を追う pursue 1 2 \
+~をみなす regard 1 2 \
+地域 region 0 2 \
+~にとって代わる replace 1 2 \
+共和国 republic 0 2 \
+結果 result 0 2 \
+~を明らかにする reveal 1 2 \
+逆の reverse 2 2 \
+恐ろしい scary 2 2 \
+悲鳴を上げる scream 1 2 \
+重大な significant 2 2 \
+状況 situation 0 2 \
+社会の social 2 2 \
+~を広げる spread 1 2 \
+餓死する starve 1 2 \
+合計 sum 0 2 \
+頂上 summit 0 2 \
+税金 tax 0 2 \
+条約 treaty 0 2 \
+労働組合 union 0 2 \
+価値 value 0 2 \
+悪 vice 0 2 \
+目に見える visible 2 2 \
+投票する vote 1 2 \
+賃金 wage 0 2 \
+~に警告する warn 1 2 \
+裕福な wealthy 2 2 \
+間違いのない accurate 2 3 \
+賛成する agree 1 3 \
+油断のない alert 2 3 \
+~を面白いと思わせる amuse 1 3 \
+~を悩ませる annoy 1 3 \
+~を正しく理解する appreciate 1 3 \
+~に賛成する approve 1 3 \
+~を驚かせる astonish 1 3 \
+~を引き付ける attract 1 3 \
+~に責任を負わせる blame 1 3 \
+顔を赤らめる blush 1 3 \
+~を祝う celebrate 1 3 \
+確信している certain 1 3 \
+~を大事にする cherish 1 3 \
+不平を言う complain 1 3 \
+複合の complex 2 3 \
+~を非難する condemn 1 3 \
+~を困惑させる confuse 1 3 \
+思いやりがある considerate 2 3 \
+~を批評する criticize 1 3 \
+冷酷な cruel 2 3 \
+好奇心が強い curious 2 3 \
+耳を傾けない deaf 2 3 \
+歓喜 delight 0 3 \
+~を否定する deny 1 3 \
+~を強く望む desire 1 3 \
+必死の desperate 2 3 \
+失望した disappointed 2 3 \
+~をかき乱す disturb 1 3 \
+教育 education 0 3 \
+有能な efficient 2 3 \
+熱狂的な enthusiastic 2 3 \
+~を容赦する excuse 1 3 \
+~を予期する expect 1 3 \
+衰える fade 1 3 \
+誤った false 2 3 \
+~を魅了する fascinate 1 3 \
+予報 forecast 0 3 \
+一般的な general 2 3 \
+気前のいい generous 2 3 \
+感謝 gratitude 0 3 \
+深い悲しみ grief 0 3 \
+~を推測する guess 1 3 \
+ためらう hesitate 1 3 \
+巨大な huge 2 3 \
+~を想像する imagine 1 3 \
+影響 impact 0 3 \
+衝動 impulse 0 3 \
+無関心な indifferent 2 3 \
+本能 instinct 0 3 \
+~を侮辱する insult 1 3 \
+いらいらした irritated 2 3 \
+論点 issue 0 3 \
+熱心な keen 2 3 \
+~にさせてやる let 1 3 \
+突き止める locate 1 3 \
+論理にかなった logical 2 3 \
+驚くべき marvelous 2 3 \
+~に乗り損なう miss 1 3 \
+控えめな modest 2 3 \
+不快な nasty 2 3 \
+否定的な negative 2 3 \
+神経質な nervous 2 3 \
+~の感情を害する offend 1 3 \
+~に反対する oppose 1 3 \
+楽天主義の optimistic 2 3 \
+受動的な passive 2 3 \
+前向きな positive 2 3 \
+~をほめる praise 1 3 \
+~を予言する predict 1 3 \
+抗議 protest 0 3 \
+~を悟る realize 1 3 \
+~を後悔する regret 1 3 \
+~を拒絶する reject 1 3 \
+したがらない reluctant 2 3 \
+責任 responsibility 0 3 \
+失礼な rude 2 3 \
+怖がる scared 1 3 \
+匂い scent 0 3 \
+感覚 sensation 0 3 \
+分別のある sensible 2 3 \
+本気の serious 2 3 \
+恥 shame 0 3 \
+ため息をつく sigh 1 3 \
+ばかばかしい silly 2 3 \
+正直な sincere 2 3 \
+~を刺激する stimulate 1 3 \
+厳しい strict 2 3 \
+頑固な stubborn 2 3 \
+~だと思う suppose 1 3 \
+~であるらしいと疑う suspect 1 3 \
+同情 sympathy 0 3 \
+緊張 tension 0 3 \
+恐ろしい terrible 2 3 \
+脅迫 threat 0 3 \
+取り乱している upset 2 3 \
+見解 viewpoint 0 3 \
+暴力 violence 0 3 \
+善 virtue 0 3 \
+いとわない willing 2 3 \
+完全な absolute 2 4 \
+~を受け取る accept 1 4 \
+~を達成する achieve 1 4 \
+~を取得する acquire 1 4 \
+実際の actual 2 4 \
+~を広告する advertise 1 4 \
+驚き alarm 0 4 \
+~を許可する allow 1 4 \
+~を適用する apply 1 4 \
+任命 appointment 0 4 \
+おおよその approximate 2 4 \
+~を断言する assert 1 4 \
+~に保証する assure 1 4 \
+注意 attention 0 4 \
+~を期する attribute 1 4 \
+~を放送する broadcast 1 4 \
+~を要求する claim 1 4 \
+同僚 colleague 0 4 \
+~に命じる command 1 4 \
+全部そろった complete 2 4 \
+構成要素 component 0 4 \
+具体的な concrete 2 4 \
+かなりの considerable 2 4 \
+~に意見を求める consult 1 4 \
+前後関係 context 0 4 \
+契約 contract 0 4 \
+~に納得させる convince 1 4 \
+正しい correct 2 4 \
+危機 crisis 0 4 \
+取り扱う deal 1 4 \
+頼る depend 1 4 \
+~に値する deserve 1 4 \
+~を決定する determine 1 4 \
+~を向ける direct 1 4 \
+~を分配する distribute 1 4 \
+~を稼ぐ earn 1 4 \
+~を雇う employ 1 4 \
+事業 enterprise 0 4 \
+装備 equipment 0 4 \
+地所 estate 0 4 \
+経験 experience 0 4 \
+次の following 2 4 \
+~を禁止する forbid 1 4 \
+~に強いる force 1 4 \
+~を許す forgive 1 4 \
+前者の former 2 4 \
+機能 function 0 4 \
+かがやき glow 0 4 \
+~を扱う handle 1 4 \
+~を輸入する import 1 4 \
+初めの initial 2 4 \
+例 instance 0 4 \
+欠如 lack 0 4 \
+後者の latter 2 4 \
+~を制限する limit 1 4 \
+積み荷 load 0 4 \
+~を造る manufacture 1 4 \
+脅威 menace 0 4 \
+~を直す mend 1 4 \
+任務 mission 0 4 \
+~に従う obey 1 4 \
+物 object 0 4 \
+~を獲得する obtain 1 4 \
+~を占める occupy 1 4 \
+~を除外する omit 1 4 \
+~を操作する operate 1 4 \
+機会 opportunity 0 4 \
+~を見落とす overlook 1 4 \
+~を説得する persuade 1 4 \
+段階 phase 0 4 \
+丸薬 pill 0 4 \
+単純な plain 2 4 \
+政治の political 2 4 \
+一部 portion 0 4 \
+主な principal 2 4 \
+優先 priority 0 4 \
+特権 privilege 0 4 \
+手順 procedure 0 4 \
+~を製造する produce 1 4 \
+~を昇進させる promote 1 4 \
+特性 property 0 4 \
+~をやめる quit 1 4 \
+~を必要とする require 1 4 \
+~を決心する resolve 1 4 \
+責任がある responsible 2 4 \
+退職する retire 1 4 \
+報酬 reward 0 4 \
+計画 scheme 0 4 \
+~を分ける share 1 4 \
+特定の specific 2 4 \
+固定された steady 2 4 \
+物質 substance 0 4 \
+表面 surface 0 4 \
+~を吊り下げる suspend 1 4 \
+一時的な temporary 2 4 \
+糸 thread 0 4 \
+きつい tight 2 4 \
+足跡 track 0 4 \
+最終の ultimate 2 4 \
+有用性 utility 0 4 \
+~する afford 1 5 \
+先祖 ancestor 0 5 \
+現れる appear 1 5 \
+~に近づく approach 1 5 \
+~を想定する assume 1 5 \
+雰囲気 atmosphere 0 5 \
+伝記 biography 0 5 \
+境界線 boundary 0 5 \
+市民 citizen 0 5 \
+文明 civilization 0 5 \
+気候 climate 0 5 \
+植民地 colony 0 5 \
+学会 congress 0 5 \
+10年間 decade 0 5 \
+~を宣言する declare 1 5 \
+子孫 descendant 0 5 \
+目的地 destination 0 5 \
+運命 destiny 0 5 \
+地区 district 0 5 \
+時代 era 0 5 \
+進化 evolution 0 5 \
+運賃 fare 0 5 \
+~の基礎を築く found 1 5 \
+遺産 heritage 0 5 \
+移民 immigrant 0 5 \
+伝説 legend 0 5 \
+人類 mankind 0 5 \
+マスメディア media 0 5 \
+国籍 nationality 0 5 \
+職業 occupation 0 5 \
+起源 origin 0 5 \
+見晴らし outlook 0 5 \
+舗装道路 pavement 0 5 \
+半島 peninsula 0 5 \
+利益 profit 0 5 \
+進歩 progress 0 5 \
+繁栄 prosperity 0 5 \
+地方 province 0 5 \
+依然として~のままである remain 2 5 \
+~を壊滅させる ruin 1 5 \
+~を分ける separate 1 5 \
+奴隷 slave 0 5 \
+源 source 0 5 \
+専門用語 term 0 5 \
+伝統 tradition 0 5 \
+~を翻訳する translate 1 5 \
+移動手段 transportation 0 5 \
+財宝 treasure 0 5 \
+種族 tribe 0 5 \
+船旅 voyage 0 5 \
+~を適合させる adjust 1 5 \
+~を前進させる advance 1 5 \
+古代の ancient 2 5 \
+~を禁止する ban 1 5 \
+~を賭ける bet 1 5 \
+退屈な boring 2 5 \
+短時間の brief 0 5 \
+~を取り消す cancel 1 5 \
+終わる cease 1 5 \
+~を行う conduct 1 5 \
+~を征服する conquer 1 5 \
+満足して content 2 5 \
+(金額・費用)が掛かる cost 1 5 \
+今の current 2 5 \
+減少する decrease 1 5 \
+~を延期する delay 1 5 \
+~を発展させる develop 1 5 \
+見えなくなる disappear 1 5 \
+優れている excel 2 5 \
+~を交換する exchange 1 5 \
+融通の利く flexible 2 5 \
+流ちょうな fluent 2 5 \
+おびえた frightened 2 5 \
+神聖な holy 2 5 \
+理想的な ideal 2 5 \
+計り知れない immense 2 5 \
+独立した independent 2 5 \
+~を意図する intend 1 5 \
+~に侵入する invade 1 5 \
+入り組んだ involved 2 5 \
+言葉の linguistic 2 5 \
+学識のある literate 2 5 \
+何とか~する manage 1 5 \
+母国の native 2 5 \
+~を組織する organize 1 5 \
+加わる participate 1 5 \
+~を上げる raise 1 5 \
+速い rapid 2 5 \
+~を自由にする release 1 5 \
+~を予約する reserve 1 5 \
+~を支配する rule 1 5 \
+田舎の rural 2 5 \
+~を提出する submit 1 5 \
+~を囲む surround 1 5 \
+~をたどる trace 1 5 \
+~を移す transfer 1 5 \
+~を経験する undergo 1 5 \
+~を結合させる unite 1 5 \
+都市の urban 2 5 \
+(家・部屋など)空いている vacant 2 5 \
+酸性の acid 2 6 \
+鋭い acute 2 6 \
+~に影響を及ぼす affect 1 6 \
+攻撃的な aggressive 2 6 \
+援助,助け aid 0 6 \
+野心的な ambitious 2 6 \
+心配して anxious 2 6 \
+適切な appropriate 2 6 \
+~する傾向がある apt 2 6 \
+人工の artificial 2 6 \
+~を助ける assist 1 6 \
+賞 award 0 6 \
+~を我慢する bear 1 6 \
+~を曲げる bend 1 6 \
+荷 burden 0 6 \
+細胞 cell 0 6 \
+~を追跡する chase 1 6 \
+化学薬品 chemical 0 6 \
+事情 circumstance 0 6 \
+~と競争する compete 1 6 \
+競争 competition 0 6 \
+集中させる concentrate 1 6 \
+衝突 crash 0 6 \
+治療 cure 0 6 \
+~を打ち破る defeat 1 6 \
+~を守る defend 1 6 \
+災害 disaster 0 6 \
+溺れる drown 1 6 \
+結果 effect 0 6 \
+初歩の elementary 2 6 \
+緊急事態 emergency 0 6 \
+努力 endeavor 0 6 \
+極めて重要な essential 2 6 \
+~を調査する examine 1 6 \
+~に勝る exceed 1 6 \
+運動 exercise 0 6 \
+~を述べる,表現する express 1 6 \
+外部の external 2 6 \
+極端な extreme 2 6 \
+公正な fair 2 6 \
+致命的な fatal 2 6 \
+疲労 fatigue 0 6 \
+~を折り畳む fold 1 6 \
+欲求不満 frustration 0 6 \
+誠実な,純粋な genuine 2 6 \
+~をつかむ grasp 1 6 \
+育つ grow 1 6 \
+~を治す heal 1 6 \
+名誉 honor 0 6 \
+~を傷つける hurt 1 6 \
+~を無視する ignore 1 6 \
+~をまねる imitate 1 6 \
+信じられない incredible 2 6 \
+乳児 infant 0 6 \
+注射 injection 0 6 \
+傷 injury 0 6 \
+会,団体 institution 0 6 \
+~を教える,指導する instruct 1 6 \
+内部の internal 2 6 \
+公正 justice 0 6 \
+~を横にする,卵を産む lay 1 6 \
+液体 liquid 0 6 \
+精神の mental 2 6 \
+~について言及する mention 1 6 \
+死ぬ運命にある mortal 2 6 \
+動機 motivation 0 6 \
+優勢 odds 0 6 \
+相手 opponent 0 6 \
+~を克服する overcome 1 6 \
+一時休止 pause 0 6 \
+(~に)固執する persist 1 6 \
+身体の physical 2 6 \
+可能性 potential 0 6 \
+~が...するのを防ぐ prevent 1 6 \
+(時間,順序が)前の previous 2 6 \
+過程 process 0 6 \
+見込み prospect 0 6 \
+~を薦める recommend 1 6 \
+~を取り戻す,回復する recover 1 6 \
+~を断る refuse 1 6 \
+規制 regulation 0 6 \
+~を取り除く relieve 1 6 \
+~を移動させる remove 1 6 \
+~を救う rescue 1 6 \
+住宅 residence 0 6 \
+~を元の状態に戻す restore 1 6 \
+~を引っかく scratch 1 6 \
+~を捜す search 1 6 \
+痛い sore 2 6 \
+力 strength 0 6 \
+~を伸ばす stretch 1 6 \
+~を打つ strike 1 6 \
+成功した successful 2 6 \
+苦しむ suffer 1 6 \
+~を支える support 1 6 \
+ふくらむ,腫れる swell 1 6 \
+症状 symptom 0 6 \
+徹底的な thorough 2 6 \
+急を要する urgent 2 6 \
+犠牲者 victim 0 6 \
+~と一緒に行く accompany 1 7 \
+~を認める admit 1 7 \
+~を採用する adopt 1 7 \
+有利 advantage 0 7 \
+謝る apologize 1 7 \
+討論する argue 1 7 \
+恥じて ashamed 2 7 \
+態度 attitude 0 7 \
+権威 authority 0 7 \
+大胆な bold 2 7 \
+~を悩ます bother 1 7 \
+お辞儀する bow 1 7 \
+有能な capable 2 7 \
+収容能力 capacity 0 7 \
+経歴 career 0 7 \
+慈善 charity 0 7 \
+子供時代 childhood 0 7 \
+仲間 companion 0 7 \
+~を比較する compare 1 7 \
+~であると結論を下す conclude 1 7 \
+信頼 confidence 0 7 \
+闘争 conflict 0 7 \
+~を祝う congratulate 1 7 \
+~を組み立てる construct 1 7 \
+協力する cooperate 1 7 \
+勇気 courage 0 7 \
+~を論争する debate 1 7 \
+~を欺く deceive 1 7 \
+~を届ける deliver 1 7 \
+~を見捨てる desert 1 7 \
+絶望 despair 0 7 \
+方言 dialect 0 7 \
+方向 direction 0 7 \
+差別 discrimination 0 7 \
+~を見分ける distinguish 1 7 \
+~を疑う doubt 1 7 \
+年配の elderly 2 7 \
+感情 emotion 0 7 \
+~を勇気付ける encourage 1 7 \
+莫大な enormous 2 7 \
+嫉妬 envy 0 7 \
+悪い evil 2 7 \
+器用さ facility 0 7 \
+能力 faculty 0 7 \
+名声 fame 0 7 \
+特徴 feature 0 7 \
+~をぎょっとさせる frighten 1 7 \
+天才 genius 0 7 \
+~に挨拶する greet 1 7 \
+謙虚な humble 2 7 \
+~を確認する identify 1 7 \
+~に印象付ける impress 1 7 \
+個々の individual 2 7 \
+~を相続する inherit 1 7 \
+知性 intellect 0 7 \
+知能の高い intelligent 2 7 \
+交流 interaction 0 7 \
+邪魔をする interfere 1 7 \
+通訳者 interpreter 0 7 \
+ねたんで jealous 2 7 \
+後輩の junior 2 7 \
+漏れる leak 1 7 \
+気前の良い liberal 2 7 \
+忠誠な loyal 2 7 \
+~と調和する match 1 7 \
+めちゃくちゃな様子 mess 0 7 \
+いたずら mischief 0 7 \
+惨めさ misery 0 7 \
+~を軽視する neglect 1 7 \
+気品のある noble 2 7 \
+うなずく nod 1 7 \
+目立った outstanding 2 7 \
+辛抱強い patient 2 7 \
+哀れみ pity 0 7 \
+貧乏 poverty 0 7 \
+偏見 prejudice 0 7 \
+前途有望な promising 2 7 \
+~を提案する propose 1 7 \
+~を困らせる puzzle 1 7 \
+激怒 rage 0 7 \
+慎む refrain 1 7 \
+~を関係させる relate 1 7 \
+頼る rely 1 7 \
+~に思い出させる remind 1 7 \
+評判 reputation 0 7 \
+~に似ている resemble 1 7 \
+返事をする respond 1 7 \
+うわさ rumor 0 7 \
+利己的な selfish 2 7 \
+先輩の senior 2 7 \
+敏感な sensitive 2 7 \
+深刻な severe 2 7 \
+よく似た similar 2 7 \
+~を強調する stress 1 7 \
+~に適する suit 1 7 \
+優れている superior 2 7 \
+優しい tender 2 7 \
+きちんとした tidy 2 7 \
+~を信頼する trust 1 7 \
+賢明さ wisdom 0 7 \
+抽象的な abtract 2 8 \
+代理人 agent 0 8 \
+狙う aim 1 8 \
+古風な antique 2 8 \
+衣服 apparel 0 8 \
+~を手配する arrange 1 8 \
+記事 article 0 8 \
+側面 aspect 0 8 \
+~をくっつける attach 1 8 \
+~を借りる borrow 1 8 \
+~を飼育する breed 1 8 \
+キラキラ輝く brilliant 2 8 \
+幅の広い broad 2 8 \
+~をだます cheat 1 8 \
+古典の classical 2 8 \
+依頼人 client 0 8 \
+~を集める collect 1 8 \
+成る consist 1 8 \
+~を対照する constrast 1 8 \
+協力 cooperation 0 8 \
+乗組員 crew 0 8 \
+犯罪 crime 0 8 \
+定義 definition 0 8 \
+出発 departure 0 8 \
+~を述べる describe 1 8 \
+~について話し合う discuss 1 8 \
+草稿 draft 0 8 \
+~を除く eliminate 1 8 \
+強調 emphasis 0 8 \
+~を強調する emphasize 1 8 \
+~に耐える endure 1 8 \
+~を楽しませる entertain 1 8 \
+最終的な eventual 2 8 \
+~を展示する exhibit 1 8 \
+~を説明する explain 1 8 \
+~を探検する explore 1 8 \
+要因 factor 0 8 \
+お気に入りの favorite 2 8 \
+姿 figure 0 8 \
+焦点 focus 0 8 \
+骨組み frame 0 8 \
+基金 fund 0 8 \
+基本的な fundamental 2 8 \
+優美な graceful 2 8 \
+恐ろしい horrible 2 8 \
+仮説 hypothesis 0 8 \
+~を例示する illustrate 1 8 \
+想像上の imaginary 2 8 \
+~を向上させる improve 1 8 \
+~を痛める injure 1 8 \
+強く主張する insist 1 8 \
+言語 language 0 8 \
+最新の latest 2 8 \
+~を始める launch 1 8 \
+層 layer 0 8 \
+文学 literature 0 8 \
+~を維持する maintain 1 8 \
+集団 mass 0 8 \
+材料 material 0 8 \
+起こる occur 1 8 \
+奇妙な odd 2 8 \
+独特の peculiar 2 8 \
+~に気づく perceive 1 8 \
+~を上演する perform 1 8 \
+哲学 philosophy 0 8 \
+詩 poetry 0 8 \
+正確な precise 2 8 \
+~を好む prefer 1 8 \
+~を保護する preserve 1 8 \
+~を装う pretend 1 8 \
+続ける proceed 1 8 \
+~を出版する publish 1 8 \
+質 quality 0 8 \
+~を引用する quote 1 8 \
+比 ratio 0 8 \
+言及する refer 1 8 \
+~を補強する reinforce 1 8 \
+遠い remote 2 8 \
+~を修理する repair 1 8 \
+~を表す represent 1 8 \
+移住者 resident 0 8 \
+資源 resourse 0 8 \
+~を再検討する review 1 8 \
+列 row 0 8 \
+彫像 sculpture 0 8 \
+~を選び出す select 1 8 \
+~を移す shift 1 8 \
+専門にする specialize 1 8 \
+壮観 spectacle 0 8 \
+険しい steep 2 8 \
+堅い stiff 2 8 \
+~を提案する suggest 1 8 \
+理論 theory 0 8 \
+~の形を変える transform 1 8 \
+傾向 trend 0 8 \
+典型的な typical 2 8 \
+全世界の universal 2 8 \
+~を変える vary 1 8 \
+冒険 venture 0 8 \
+歩き回る wander 1 8 \
+~を吸収する absorb 1 9 \
+豊富な abundant 2 9 \
+~を(...に)適合させる adapt 1 9 \
+~を変える alter 1 9 \
+分析 analysis 0 9 \
+平均(値) average 0 9 \
+破裂する burst 1 9 \
+(~に)特有な characteristic 2 9 \
+~を構成する,作曲する compose 1 9 \
+~を含む contain 1 9 \
+生き物 creature 0 9 \
+説明する,証明する demonstrate 1 9 \
+~を下る descend 1 9 \
+詳細 detail 0 9 \
+装置 device 0 9 \
+直径 diameter 0 9 \
+~を消化する digest 1 9 \
+~を発見する discover 1 9 \
+~を(...に)分ける divide 1 9 \
+要素 element 0 9 \
+百科事典 encyclopedia 0 9 \
+環境 environment 0 9 \
+爆発噴火 eruption 0 9 \
+存在する exist 1 9 \
+増す expand 1 9 \
+実験 experiment 0 9 \
+並外れた extraordinary 2 9 \
+料金 fee 0 9 \
+女性の female 2 9 \
+炎 flame 0 9 \
+流れ込む flow 1 9 \
+流動体 fluid 0 9 \
+化石 fossil 0 9 \
+凍る freeze 1 9 \
+燃料 fuel 0 9 \
+遺伝子 gene 0 9 \
+だんだんの gradual 2 9 \
+穀物,一粒 grain 0 9 \
+重力 gravity 0 9 \
+(動植物の)生息地 habitat 0 9 \
+収穫,結果 harvest 0 9 \
+湿気の多い humid 2 9 \
+水素 hydrogen 0 9 \
+~を指し示す indicate 1 9 \
+~を発明する invent 1 9 \
+~を調べる investigate 1 9 \
+男性の male 2 9 \
+哺乳動物 mammal 0 9 \
+成熟した mature 2 9 \
+最大限の maximum 2 9 \
+~を測る measure 1 9 \
+溶ける,~を溶かす melt 1 9 \
+鉱山,地雷 mine 0 9 \
+最小限の minimum 2 9 \
+小ぎれいな,きちんとした neat 2 9 \
+原子力の,核の nuclear 2 9 \
+~を観察する observe 1 9 \
+明らかな obvious 2 9 \
+反対側の opposite 2 9 \
+軌道 orbit 0 9 \
+~を(...に)借りている owe 1 9 \
+酸素 oxygen 0 9 \
+特定の particular 2 9 \
+石油 petroleum 0 9 \
+現象 phenomenon 0 9 \
+積み重ね pile 0 9 \
+(地球などの)極 pole 0 9 \
+汚染 pollution 0 9 \
+圧迫 pressure 0 9 \
+量 quantity 0 9 \
+でたらめな,無作為 random 2 9 \
+(~に)反応する(to~) react 1 9 \
+~を反射する reflect 1 9 \
+相対的な relative 2 9 \
+注目すべき remarkable 2 9 \
+研究 research 0 9 \
+さび rust 0 9 \
+衛星 satellite 0 9 \
+~を探し求める seek 1 9 \
+浅い shallow 2 9 \
+滑らかな smooth 2 9 \
+土壌 soil 0 9 \
+解決,解決法 solution 0 9 \
+(分類上の)種 species 0 9 \
+調査 survey 0 9 \
+~より長生きする,生き残る survive 1 9 \
+温度,気温,体温 temperature 0 9 \
+体温計,温度計 thermometer 0 9 \
+厚い thick 2 9 \
+風潮,潮の干満 tide 0 9 \
+ごく小さい tiny 2 9 \
+~を扱う treat 1 9 \
+すさまじい,ものすごい tremendous 2 9 \
+単位 unit 0 9 \
+(突然)消える vanish 1 9 \
+蒸気 vapor 0 9 \
+広大な vast 2 9 \
+不可欠な vital 2 9 \
+重さがある weigh 2 9 \
+~を傷つける wound 1 9 \
+~を成し遂げる accomplish 1 10 \
+~を訴える accuse 1 10 \
+~を賞賛する admire 1 10 \
+起こる arise 1 10 \
+~を逮捕する arrest 1 10 \
+~を連想する associate 1 10 \
+~に出席する attend 1 10 \
+~を避ける avoid 1 10 \
+~を起こす awake 1 10 \
+振る舞う behave 1 10 \
+~を埋める bury 1 10 \
+~を結合させる combine 1 10 \
+~を犯す commit 1 10 \
+結果 consequence 0 10 \
+~を熟考する consider 1 10 \
+構成 constitution 0 10 \
+現代の contemporary 2 10 \
+~を続ける continue 1 10 \
+反対の contrary 2 10 \
+~を与える contribute 1 10 \
+法廷 court 0 10 \
+あえて~する dare 1 10 \
+~を断る decline 1 10 \
+~を引く draw 1 10 \
+~に偶然出会う encounter 1 10 \
+~に約束させる engage 1 10 \
+新時代 epoch 0 10 \
+~を重んじる esteem 1 10 \
+永遠の eternal 2 10 \
+証拠 evidence 0 10 \
+例外 exception 0 10 \
+~をさらす expose 1 10 \
+信頼 faith 0 10 \
+~を果たす fulfill 1 10 \
+じっと見る gaze 1 10 \
+性 gender 0 10 \
+感謝する grateful 1 10 \
+有罪の guilty 2 10 \
+有害な harmful 2 10 \
+~を隠す hide 1 10 \
+階級制度 hierarchy 0 10 \
+人間性 humanity 0 10 \
+~を暗示する imply 1 10 \
+~を含む include 1 10 \
+無限の infinite 2 10 \
+~に影響を及ぼす influence 1 10 \
+無邪気な innocent 2 10 \
+~を鼓舞する inspire 1 10 \
+激しい intensive 2 10 \
+~を紹介する introduce 1 10 \
+刑務所 jail 0 10 \
+法律上の legal 2 10 \
+論理 logic 0 10 \
+重要である matter 2 10 \
+中間の medium 2 10 \
+慈悲 mercy 0 10 \
+道徳の moral 2 10 \
+相互の mutual 2 10 \
+中立の neutral 2 10 \
+~に気がつく notice 1 10 \
+~を所有する own 1 10 \
+平行な parallel 2 10 \
+議会 parliament 0 10 \
+~を磨く polish 1 10 \
+祈る pray 1 10 \
+原理 principle 0 10 \
+~を禁止する prohibit 1 10 \
+心理学 psychology 0 10 \
+~を罰する punish 1 10 \
+根本的な radical 2 10 \
+妥当な reasonable 2 10 \
+~を思い出す recall 1 10 \
+~を受け取る receive 1 10 \
+~を見分ける recognize 1 10 \
+~を改善する reform 1 10 \
+規則正しい regular 2 10 \
+宗教 religion 0 10 \
+~と言う remark 1 10 \
+~に抵抗する resist 1 10 \
+~から盗む rob 1 10 \
+犠牲 sacrifice 0 10 \
+~に使える serve 1 10 \
+~を確定する settle 1 10 \
+罪 sin 0 10 \
+~をだめにする spoil 1 10 \
+安定した stable 2 10 \
+~を突き刺す stick 1 10 \
+策略 strategy 0 10 \
+もがく struggle 1 10 \
+~を代わりに用いる substitute 1 10 \
+自殺 suicide 0 10 \
+~を掃く sweep 1 10 \
+~を引き裂く tear 1 10 \
+~しがちである tend 1 10 \
+試み trial 0 10 \
+一団 troop 0 10 \
+進んで行う voluntary 1 10 \
+~を浪費する waste 1 10 \
+幸福 welfare 0 10 \
+目撃者 witness 0 10 \
+学校 academy 0 1 \
+富,十分 affluence 0 1 \
+豊富な ample 2 1 \
+見かけ上の apparent 2 1 \
+屋根裏部屋 attic 0 1 \
+~をかむ bite 1 1 \
+白紙の blank 2 1 \
+まばたきする blink 1 1 \
+大失敗,へま blunder 0 1 \
+案内所,局 bureau 0 1 \
+部屋,会議所 chamber 0 1 \
+偶然の一致 coincidence 0 1 \
+商品 commodity 0 1 \
+簡潔な concise 2 1 \
+(~に)順応する conform 1 1 \
+よく見える,目立つ conspicuous 2 1 \
+~と矛盾する contradict 1 1 \
+~を詰め込む cram 1 1 \
+習慣的な customary 2 1 \
+はっきりと限定された definite 2 1 \
+~を破壊する devastate 1 1 \
+嫌悪 disgust 0 1 \
+~を寄贈する donate 1 1 \
+~を処分する,捨てる dump 1 1 \
+暮らす dwell 1 1 \
+~を染める dye 1 1 \
+~を具体化する,具現化する embody 1 1 \
+~に備え付ける equip 1 1 \
+女性の feminine 2 1 \
+~を行って取ってくる fetch 1 1 \
+インフルエンザ flu 0 1 \
+むかつくほど嫌な foul 2 1 \
+毛皮 fur 0 1 \
+(家具など)~に備え付ける furnish 1 1 \
+暗い gloomy 2 1 \
+~をひっつかむ grab 1 1 \
+食料品店 grocery 0 1 \
+生け垣 hedge 0 1 \
+温かくもてなす hospitable 1 1 \
+~を含む,取り入れる incorporate 1 1 \
+~に住む inhabit 1 1 \
+~を(...に)差し込む insert 1 1 \
+(...から)~を孤立させる isolate 1 1 \
+余白 margin 0 1 \
+乱雑な messy 2 1 \
+~を誤用する misuse 1 1 \
+瞬間の momentary 2 1 \
+単調な monotonous 2 1 \
+ささやき,もそもそしゃべる murmur 1 1 \
+悪夢 nightmare 0 1 \
+非常に多い numerous 2 1 \
+保育園 nursery 0 1 \
+時折の occasional 2 1 \
+装飾品 ornament 0 1 \
+~の皮をむく peel 1 1 \
+(~から)のぞく peep 1 1 \
+郵便料金 postage 0 1 \
+妊娠している pregnant 2 1 \
+(順序が)前の prior 2 1 \
+深刻な profound 2 1 \
+発音する pronounce 1 1 \
+ガタガタ鳴る rattle 1 1 \
+~を育てる rear 1 1 \
+調理法 recipe 0 1 \
+~を思い出す recollect 1 1 \
+~を非難する reproach 1 1 \
+腐った rotten 2 1 \
+決まり切った routine 2 1 \
+ごみ rubbish 0 1 \
+(子供)を(...の理由で)しかる scold 1 1 \
+学期 semester 0 1 \
+説教 sermon 0 1 \
+(~と)同時の simultaneous 2 1 \
+超高層ビル,摩天楼 skyscraper 0 1 \
+(戸など)をバタンと閉める slam 1 1 \
+虐殺 slaughter 0 1 \
+洗練された sophisticated 2 1 \
+~を搾る squeeze 1 1 \
+染み stain 0 1 \
+文房具 stationery 0 1 \
+貯蔵 storage 0 1 \
+~を裸にする strip 1 1 \
+~を要約する summarize 1 1 \
+~を持続させる sustain 1 1 \
+苦労 toil 0 1 \
+印 token 0 1 \
+~を踏む tread 1 1 \
+つまらないもの trifle 0 1 \
+ささいな trivial 2 1 \
+~を暴露する uncover 1 1 \
+大学生 undergraduate 0 1 \
+~をほどく undo 1 1 \
+~を広げる unfold 1 1 \
+~を活用する utilize 1 1 \
+容器大型船；管 vessel 0 1 \
+語彙 vocabulary 0 1 \
+未亡人 widow 0 1 \
+(~する)価値がある worthy 2 1 \
+あくびする yawn 1 1 \
+大声を上げる yell 1 1 \
+上院 Senate 0 2 \
+~を積み上げる accumulate 1 2 \
+~を治める,投薬する administer 1 2 \
+~を支持する advocate 1 2 \
+裕福な affluent 2 2 \
+~を結びつける,同盟となる ally 1 2 \
+無政府状態 anarchy 0 2 \
+懸念 apprehension 0 2 \
+集める,組み立てる assemble 1 2 \
+集会 assembly 0 2 \
+取り付け attachment 0 2 \
+破産した bankrupt 2 2 \
+支持,代表 behalf 0 2 \
+わいろ bribe 0 2 \
+予算 budget 0 2 \
+計算する calculate 1 2 \
+~を分類する categorize 1 2 \
+協力する collaborate 1 2 \
+衝突する collide 1 2 \
+ごく普通の commonplace 2 2 \
+共産主義 communism 0 2 \
+有能な competent 2 2 \
+保守的な conservative 2 2 \
+消費 consumption 0 2 \
+貢献 contribution 0 2 \
+うまく処理する cope 1 2 \
+決定的な crucial 2 2 \
+否定 denial 0 2 \
+預金 deposit 0 2 \
+不景気 depression 0 2 \
+~を引き出す,~に由来する derive 1 2 \
+~を取り外す detach 1 2 \
+外交 diplomacy 0 2 \
+外交の diplomatic 2 2 \
+がっかりさせる discourage 1 2 \
+~を議論(口論)する dispute 1 2 \
+徹底的な drastic 2 2 \
+生態の ecological 2 2 \
+経済的な economical 2 2 \
+精巧な elaborate 2 2 \
+選ぶ elect 1 2 \
+大使館 embassy 0 2 \
+同等の equivalent 2 2 \
+評価する evaluate 1 2 \
+~を発展させる evolve 1 2 \
+~を予感する foresee 1 2 \
+一部,分数 fraction 0 2 \
+頻度 frequency 0 2 \
+摩擦 friction 0 2 \
+生ごみ garbage 0 2 \
+を統治する govern 1 2 \
+総計の gross 2 2 \
+悩ませること harassment 0 2 \
+憎しみ hatred 0 2 \
+本部 headquarters 0 2 \
+人質 hostage 0 2 \
+熱心な,~に没頭した intent 2 2 \
+投資する invest 1 2 \
+少なくなる lessen 1 2 \
+塊 lump 0 2 \
+市長 mayor 0 2 \
+製品 merchandise 0 2 \
+大臣 minister 0 2 \
+独占 monopoly 0 2 \
+~を指名する,任命する nominate 1 2 \
+有名な(悪名高い) notorious 2 2 \
+愛国的な patriotic 2 2 \
+嘆願する plead 1 2 \
+首相,特別な premier 0 2 \
+金では買えない,貴重な priceless 2 2 \
+見込み,確率 probability 0 2 \
+製造 production 0 2 \
+~に資格を与える,適している qualify 1 2 \
+アンケート questionnaire 0 2 \
+身代金 ransom 0 2 \
+反抗する rebel 1 2 \
+~と思う reckon 1 2 \
+君臨する reign 1 2 \
+関係のある relevant 2 2 \
+辞任する resign 1 2 \
+~を制限する restrict 1 2 \
+~を再構築する restructure 1 2 \
+小売り retail 0 2 \
+~を保有する retain 1 2 \
+撤退する retreat 1 2 \
+歳入 revenue 0 2 \
+革命 revolution 0 2 \
+~をさげすむ scorn 1 2 \
+を発散する,(毛皮などを)落とす shed 1 2 \
+縮む shrink 1 2 \
+~を示す signify 1 2 \
+急に上がる soar 1 2 \
+~を明確化する specify 1 2 \
+政治家 statesman 0 2 \
+静的な static 2 2 \
+統計 statistics 0 2 \
+相当な,かなりの量の substantial 2 2 \
+(人などを)せかす urge 1 2 \
+多様性 variety 0 2 \
+ささやく whisper 1 2 \
+実績,大したもの accomplishment 0 3 \
+びっくりさせる,驚く amaze 1 3 \
+感じのいい,愛想がいい amiable 2 3 \
+苦しみ,苦痛 anguish 0 3 \
+嫌意,わだかまり antipathy 0 3 \
+拍手 applause 0 3 \
+任命する,決める appoint 1 3 \
+気まぐれな,専制 arbitrary 2 3 \
+横柄,無礼 arrogant 0 3 \
+評価,査定 assessment 0 3 \
+不器用だ,ぎこちない awkward 2 3 \
+当惑する bewilder 1 3 \
+自慢する,鼻にかける boast 1 3 \
+きずな,公債 bond 0 3 \
+退屈だ,うんざりする bore 2 3 \
+残忍な,厳しい brutal 2 3 \
+いじめる bully 1 3 \
+成長する,急増する burgeon 1 3 \
+話する,雑談する chat 1 3 \
+くすくす笑う,面白がる chuckle 1 3 \
+抜ける,倒れる collapse 1 3 \
+お世辞,あいさつ compliment 0 3 \
+十分に理解する comprehend 1 3 \
+妥協する,屈服する compromise 1 3 \
+関係,乗り換え connection 0 3 \
+慰め,残念 consolation 0 3 \
+軽べつ,さげすみ contempt 0 3 \
+礼儀,ご厚意 courtesy 0 3 \
+信用,名声 credit 0 3 \
+悪賢い,巧妙な cunning 2 3 \
+好奇心,骨とう品 curiosity 0 3 \
+冷笑するような,うがった cynical 2 3 \
+欠点,欠陥 defect 0 3 \
+軽蔑する despise 1 3 \
+診断 diagnosis 0 3 \
+尊厳,品位 dignity 0 3 \
+熱心だ,苦心の diligent 2 3 \
+しつけ,規律 discipline 0 3 \
+暴く,公開する disclose 1 3 \
+ろうばい,失望 dismay 0 3 \
+真剣な,重要な earnest 2 3 \
+常軌を逸する,変わりな eccentric 2 3 \
+雄弁な,表れる eloquent 2 3 \
+恥ずかしがる,混乱させる embarrass 1 3 \
+放出,排出 emission 0 3 \
+精力的な,効果的な energetic 2 3 \
+誇張する,強調する exaggerate 1 3 \
+お世辞をいう,うぬぼれる flatter 1 3 \
+がっかりさせる,くじかれる frustrate 1 3 \
+ひどく腹をたてる,猛烈な furious 2 3 \
+貪欲だ,欲しがる greedy 1 3 \
+笑みを浮かべる,歯をむき出す grin 1 3 \
+恥をかかせる,恥ずかしい humiliate 2 3 \
+偽善 hypocrisy 0 3 \
+尋ねる inquire 1 3 \
+親密だ,個人的な intimate 2 3 \
+皮肉 irony 0 3 \
+悲しむ,残念に思う lament 1 3 \
+悪意,恨み malice 0 3 \
+誤解する misunderstand 1 3 \
+つつましさ,節度 modesty 0 3 \
+チェックする,監視する monitor 1 3 \
+市営の,自治体の municipal 2 3 \
+世間知らず,無邪気 naive 0 3 \
+目標,目的格 objective 0 3 \
+とらわれる,取りつかれる obsess 1 3 \
+頑固な,しにくい obstinate 2 3 \
+生産,生産高 output 0 3 \
+参加者,被験者 participant 0 3 \
+情熱,熱中 passion 0 3 \
+買う,怒らせようとする provoke 1 3 \
+慎重な prudent 2 3 \
+理性的な,合理的な rational 2 3 \
+不況,後退 recession 0 3 \
+改善策,療法 remedy 0 3 \
+憤慨する,嫌だ resent 1 3 \
+落ち着きがない restless 2 3 \
+ばかにする,あざける ridicule 1 3 \
+怖がる,脅す scare 1 3 \
+台本,文字 script 0 3 \
+懐疑的な skeptical 2 3 \
+泣く,泣きじゃくる sob 1 3 \
+酔っていない,落ち着いている sober 2 3 \
+独り,唯一の solitary 2 3 \
+厳しい,厳 stern 0 3 \
+最高の,この上ない supreme 2 3 \
+同情する,賛同する sympathize 1 3 \
+如才なさ,機転 tact 0 3 \
+口数が多い,おしゃべり talkative 2 3 \
+からかう,しつこくせがむ tease 1 3 \
+誘惑,心引かれるもの temptation 0 3 \
+ぞっとさせる terrify 2 3 \
+テロ行為 terrorism 0 3 \
+臆病,おどおどして timid 2 3 \
+寛大だ,耐える tolerant 2 3 \
+虚栄心,むなしいもの vanity 0 3 \
+下品な vulgar 2 3 \
+泣く,涙をながす weep 1 3 \
+しわ wrinkle 0 3 \
+切望する,恋しがる yearn 1 3 \
+~を捨てる abandon 1 4 \
+常識に反した,ばかげた absurd 2 4 \
+~を認める acknowledge 1 4 \
+入場許可 admission 0 4 \
+青年期の adolescent 1 4 \
+協議事項 agenda 0 4 \
+貴族 aristocracy 0 4 \
+ごう慢 arrogance 0 4 \
+~を割り当てる,指定する assign 1 4 \
+~を裏切る betray 1 4 \
+先入観 bias 0 4 \
+縛られた bound 2 4 \
+大躍進 breakthrough 0 4 \
+~を捕らえる capture 1 4 \
+~を引用する cite 1 4 \
+衝突 clash 0 4 \
+強制された compulsory 2 4 \
+~を白状する confess 1 4 \
+~を制限する confine 1 4 \
+良心 conscience 0 4 \
+同意する consent 1 4 \
+~を構成する constitute 1 4 \
+論争 controversy 0 4 \
+協議会 council 0 4 \
+決定的な decisive 2 4 \
+意図的な deliberate 2 4 \
+~から・・・を奪う deprive 1 4 \
+~を拘留する detain 1 4 \
+~を減らす diminish 1 4 \
+支配的な dominant 2 4 \
+ものも言えない dumb 2 4 \
+~を保証する ensure 1 4 \
+使い走り errand 0 4 \
+排他的な exclusive 2 4 \
+を遂行する execute 1 4 \
+~を除名する,追放する expel 1 4 \
+~を利用する,搾取する exploit 1 4 \
+逃げる flee 1 4 \
+~を促進する foster 1 4 \
+大騒ぎ fuss 0 4 \
+文法上の grammatical 2 4 \
+厳粛な,墓(名詞) grave 2 4 \
+指針 guideline 0 4 \
+必須の,命令的な imperative 2 4 \
+~を課す impose 1 4 \
+革新 innovation 0 4 \
+情報提供 input 0 4 \
+年少者の juvenile 2 4 \
+法律制定 legislation 0 4 \
+合法の legitimate 2 4 \
+法的責任がある liable 2 4 \
+主要都市 metropolis 0 4 \
+~を嘆く mourn 1 4 \
+いたずらな naughty 2 4 \
+交渉する negotiate 1 4 \
+宣誓 oath 0 4 \
+義務 obligation 0 4 \
+~することを余儀なくさせる oblige 1 4 \
+孤児 orphan 0 4 \
+処罰 penalty 0 4 \
+人員 personnel 0 4 \
+固い約束 pledge 0 4 \
+極の polar 2 4 \
+世論調査 poll 0 4 \
+前任者 predecessor 0 4 \
+有史以前の prehistoric 2 4 \
+~を宣言する proclaim 1 4 \
+宣伝 propaganda 0 4 \
+出版社 publisher 0 4 \
+人種差別 racism 0 4 \
+歓迎会,受付 reception 0 4 \
+~を規制する regulate 1 4 \
+更新 renewal 0 4 \
+代表者 representative 0 4 \
+ちゃんとした,立派な respectable 2 4 \
+敬意を表する respectful 2 4 \
+~を抑える restrain 1 4 \
+退職 retirement 0 4 \
+同窓会 reunion 0 4 \
+~の復讐をする revenge 1 4 \
+厳格な rigid 2 4 \
+印税,特許権使用料 royalty 0 4 \
+奨学金 scholarship 0 4 \
+安全な secure 2 4 \
+感情 sentiment 0 4 \
+集まり session 0 4 \
+社会学 sociology 0 4 \
+豪華な splendid 2 4 \
+観点 standpoint 0 4 \
+~を告訴する sue 1 4 \
+~を召喚する summon 1 4 \
+~を誓う swear 1 4 \
+傾向 tendency 0 4 \
+盗み theft 0 4 \
+引き金 trigger 0 4 \
+骨の折れる troublesome 2 4 \
+失業 unemployment 0 4 \
+誓い vow 0 4 \
+令状 warrant 0 4 \
+悪い wicked 2 4 \
+逆境,不運 adversity 0 5 \
+逸話 anecdote 0 5 \
+古文書,公文書 archive 0 5 \
+武装した armed 2 5 \
+~を確かめる ascertain 1 5 \
+~を襲撃する assault 1 5 \
+地図帳 atlas 0 5 \
+軸 axis 0 5 \
+野蛮人 barbarian 0 5 \
+防壁,障壁 barrier 0 5 \
+峡谷 canyon 0 5 \
+乗り物,馬車 carriage 0 5 \
+年代記 chronicle 0 5 \
+手掛かり,ヒント clue 0 5 \
+慣例的な conventional 2 5 \
+揺りかご cradle 0 5 \
+(船で)~を巡航する cruise 1 5 \
+~を耕す cultivate 1 5 \
+(~から/...へ)出発する depart 1 5 \
+(~と/...の間で)異なる differ 1 5 \
+恐竜 dinosaur 0 5 \
+~を(液体などに)ちょっとつける dip 1 5 \
+(~の間で)区別する discriminate 1 5 \
+~をう回させる divert 1 5 \
+優勢 dominance 0 5 \
+~を統治する dominate 1 5 \
+悲運,悪い運命 doom 0 5 \
+~を(...で)取り囲む enclose 1 5 \
+~を大きくする enlarge 1 5 \
+(~への)遠足 excursion 0 5 \
+外来の exotic 2 5 \
+遠征 expedition 0 5 \
+ぐう話 fable 0 5 \
+飢きん famine 0 5 \
+運命,巡り合わせ fate 0 5 \
+(土地,土壌が)肥えた fertile 2 5 \
+(文化などが)栄える flourish 1 5 \
+決まり文句,数式 formula 0 5 \
+国境,境界,未開拓の分野 frontier 0 5 \
+地理学 geography 0 5 \
+全世界の global 2 5 \
+歴史的に重要な historic 2 5 \
+(~に)敵意を持った hostile 2 5 \
+帝国の imperial 2 5 \
+暗黙の implicit 2 5 \
+(~で)非常に評判の悪い infamous 2 5 \
+~を誘拐する kidnap 1 5 \
+景色 landscape 0 5 \
+格言 maxim 0 5 \
+中世の medieval 2 5 \
+(~について)黙想する meditate 1 5 \
+記念品 memento 0 5 \
+(~から/...へ)移住する migrate 1 5 \
+(人)を誤った方向に導く mislead 1 5 \
+(事実に基づく)物語 narrative 0 5 \
+(船,飛行機など)を操縦する navigate 1 5 \
+航海 navigation 0 5 \
+(人,動物の)子孫 offspring 0 5 \
+(~に)起源を持つ originate 1 5 \
+小作農 peasant 0 5 \
+歩行者 pedestrian 0 5 \
+柱 pillar 0 5 \
+開拓者 pioneer 0 5 \
+陰謀,構想 plot 0 5 \
+県 prefecture 0 5 \
+普及する prevail 1 5 \
+原始的な primitive 2 5 \
+(人,物の)側面,人物評 profile 0 5 \
+ことわざ,格言 proverb 0 5 \
+追求,追跡 pursuit 0 5 \
+探索,探検 quest 0 5 \
+(順番を待つ人,車の)列 queue 0 5 \
+人種 race 0 5 \
+領域,王国 realm 0 5 \
+~を追い払う repel 1 5 \
+行楽地 resort 0 5 \
+暴動 riot 0 5 \
+神聖な sacred 2 5 \
+唯一の,足の裏 sole 2 5 \
+土産 souvenir 0 5 \
+~を分割する split 1 5 \
+品種,緊張,張り strain 0 5 \
+道に迷う stray 1 5 \
+ぶらつく stroll 1 5 \
+要約 summary 0 5 \
+~を抑圧する suppress 1 5 \
+(建築用の)材木 timber 0 5 \
+(他の説,行為など)を許容する tolerate 1 5 \
+墓(穴) tomb 0 5 \
+移り変わり transition 0 5 \
+(~に対する)勝利 triumph 0 5 \
+薄明かり twilight 0 5 \
+~を引き受ける undertake 1 5 \
+~の錠を開ける unlock 1 5 \
+語法,使用方法 usage 0 5 \
+~を広くする widen 1 5 \
+広範囲に及ぶ widespread 2 5 \
+荒野,荒れ地 wilderness 0 5 \
+~を(...から)撤退させる withdraw 1 5 \
+難破,自動車事故 wreck 0 5 \
+急の,突然の abrupt 2 6 \
+(知人など)~に知らせる acquaint 1 6 \
+順応 adaptation 0 6 \
+苦痛 agony 0 6 \
+~を評価する assess 1 6 \
+細菌 bacteria 0 6 \
+(頭が)はげた bald 2 6 \
+~を縛る bind 1 6 \
+出血する bleed 1 6 \
+~に乗り込む board 1 6 \
+災難 calamity 0 6 \
+証明書 certificate 0 6 \
+窒息する choke 1 6 \
+循環 circulation 0 6 \
+一致,総意 consensus 0 6 \
+せき cough 0 6 \
+信じられる credible 2 6 \
+評論家 critic 0 6 \
+致命的な,致死の deadly 2 6 \
+を見つける detect 1 6 \
+~を工夫する devise 1 6 \
+~を‥と診断する diagnose 1 6 \
+身体障がいのある disabled 2 6 \
+悩み,苦難,窮地 distress 0 6 \
+目が回る dizzy 1 6 \
+寄付 donation 0 6 \
+~を排出させる drain 1 6 \
+過度の excessive 2 6 \
+~を疲れさせる exhaust 1 6 \
+~を抽出する extract 1 6 \
+繊維 fiber 0 6 \
+眉をひそめる frown 1 6 \
+うめき声 groan 0 6 \
+苦難,困難 hardship 0 6 \
+~を抱きしめる hug 1 6 \
+免疫の immune 2 6 \
+伝染性の infectious 2 6 \
+生まれながらの innate 2 6 \
+正気でない insane 2 6 \
+~を点検する inspect 1 6 \
+小冊子 leaflet 0 6 \
+やせた,傾いた lean 2 6 \
+~を減じる,低くする lower 1 6 \
+肺 lung 0 6 \
+力 might 0 6 \
+栄養分 nutrition 0 6 \
+抑圧,圧制 oppression 0 6 \
+臓器 organ 0 6 \
+~を圧倒する,押しつぶす overwhelm 1 6 \
+青白い pale 2 6 \
+荒い息をする,あえぐ pant 2 6 \
+微粒子 particle 0 6 \
+~を貫通する penetrate 1 6 \
+内科医 physician 0 6 \
+~を突き通す pierce 1 6 \
+疫病,災い plague 0 6 \
+~を‥に突っ込む plunge 1 6 \
+予防(策) precaution 0 6 \
+処方箋 prescription 0 6 \
+防止 prevention 0 6 \
+即座の prompt 2 6 \
+たんぱく質 protein 0 6 \
+供給 provision 0 6 \
+言及 reference 0 6 \
+~を元気づける,回復させる refresh 1 6 \
+~を取り戻す regain 1 6 \
+除去 removal 0 6 \
+~を生き返らせる revive 1 6 \
+~をゆすぐ rinse 1 6 \
+~を回転させる rotate 1 6 \
+衛生の sanitary 2 6 \
+傷跡 scar 0 6 \
+~をまき散らす scatter 1 6 \
+避難所 shelter 0 6 \
+身震いする,震える shiver 1 6 \
+骨格,ガイコツ skeleton 0 6 \
+くしゃみをする sneeze 1 6 \
+~のにおいを嗅ぐ sniff 1 6 \
+期間,長さ span 0 6 \
+見本 specimen 0 6 \
+固定観念 stereotype 0 6 \
+かがむ stoop 1 6 \
+補足,栄養補助剤 supplement 0 6 \
+外科医 surgeon 0 6 \
+手術 surgery 0 6 \
+を飲み込む swallow 1 6 \
+末期の,終着駅 terminal 2 6 \
+治療,療法 therapy 0 6 \
+渇き thirst 0 6 \
+~をひどく苦しめる,拷問する torture 1 6 \
+毒素 toxin 0 6 \
+~を‥へ送る,運ぶ transmit 1 6 \
+腫瘍 tumor 0 6 \
+心配な,不安な uneasy 2 6 \
+有効な valid 2 6 \
+病原体,ウィルス virus 0 6 \
+傷つきやすい,弱い vulnerable 1 6 \
+~を弱くする weaken 1 6 \
+疲れ切った weary 2 6 \
+機知,機転 wit 0 6 \
+南極 antarctic 0 7 \
+人類学 anthropology 0 7 \
+類人猿 ape 0 7 \
+天文学 astronomy 0 7 \
+原子力による atomic 2 7 \
+すさまじい,(味などが)ひどい awful 2 7 \
+気圧計 barometer 0 7 \
+生物学 biology 0 7 \
+花,花盛り bloom 0 7 \
+植物学 botany 0 7 \
+そよ風 breeze 0 7 \
+炭素 carbon 0 7 \
+化学 chemistry 0 7 \
+~を分類する classify 1 7 \
+粘土 clay 0 7 \
+円柱,(新聞などの)コラム column 0 7 \
+彗星,ほうき星 comet 0 7 \
+合成の,混合の compound 2 7 \
+~を保護する,保存する conserve 1 7 \
+~を‥に変える convert 1 7 \
+中心 core 0 7 \
+宇宙 cosmos 0 7 \
+砕ける,~にひびを入れる crack 1 7 \
+はう creep 1 7 \
+湿気のある damp 2 7 \
+~を推定する deduce 1 7 \
+濃密な,密度の高い dense 2 7 \
+~を‥に捧げる devote 1 7 \
+薄暗い dim 2 7 \
+寸法,規格,次元 dimension 0 7 \
+~を処分する,捨てる dispose 1 7 \
+~を溶かす dissolve 1 7 \
+~をゆがめる distort 1 7 \
+非常に恐ろしい dreadful 2 7 \
+したたり落ちる drip 1 7 \
+日照り,干ばつ drought 0 7 \
+二元的な dual 2 7 \
+生態学 ecology 0 7 \
+浮かび上がる,現れる emerge 1 7 \
+~を出す emit 1 7 \
+赤道 equator 0 7 \
+蒸発 evaporation 0 7 \
+存在 existence 0 7 \
+死に絶えた extinct 2 7 \
+~を消す,消滅させる extinguish 1 7 \
+かすかな faint 2 7 \
+荒々しい,どう猛な fierce 2 7 \
+霜 frost 0 7 \
+銀河 galaxy 0 7 \
+~を生み出す generate 1 7 \
+遺伝子の genetic 2 7 \
+幾何学 geometry 0 7 \
+氷河 glacier 0 7 \
+地球 globe 0 7 \
+~をふ化させる hatch 1 7 \
+堆積,たくさん heap 0 7 \
+半球 hemisphere 0 7 \
+成分,原料 ingredient 0 7 \
+本来備わっている inherent 2 7 \
+おびただしい,無数の innumerable 2 7 \
+跳ねる leap 1 7 \
+~をなめる lick 1 7 \
+顕微鏡 microscope 0 7 \
+鉱物 mineral 0 7 \
+適度の moderate 2 7 \
+分子 molecule 0 7 \
+氾濫する,あふれ出る overflow 1 7 \
+死ぬ perish 1 7 \
+保存 preservation 0 7 \
+えじき prey 0 7 \
+卓越した,著名な,目立つ prominent 1 7 \
+放射 radiation 0 7 \
+放射能 radioactivity 0 7 \
+半径 radius 0 7 \
+降雨 rainfall 0 7 \
+光線 ray 0 7 \
+~を収穫する reap 1 7 \
+~を精製する refine 1 7 \
+避難 refuge 0 7 \
+は虫類 reptile 0 7 \
+回転する,循環する revolve 1 7 \
+熟した ripe 2 7 \
+ほえる roar 1 7 \
+~を細かく調べる,走査する scan 1 7 \
+第２の secondary 2 7 \
+~を鋭くする sharpen 1 7 \
+１つだけの singular 2 7 \
+~を‥にひたす,びしょ濡れにする soak 1 7 \
+太陽の solar 2 7 \
+(種を)まく sow 1 7 \
+輝く,きらめく sparkle 2 7 \
+壮観な spectacular 2 7 \
+軸,茎,(動=忍び寄る) stalk 0 7 \
+飼いならされた tame 2 7 \
+透明な transparent 2 7 \
+台風 typhoon 0 7 \
+垂直の vertical 2 7 \
+火山 volcano 0 7 \
+雑草 weed 0 7 \
+~を産出する yield 1 7 \
+~を悪用する abuse 1 8 \
+思春期 adolescence 0 8 \
+あいまいな ambiguous 2 8 \
+登る ascend 1 8 \
+賛成 assent 0 8 \
+仮定 assumption 0 8 \
+聞こえる audible 2 8 \
+曲がっている bent 2 8 \
+燃え盛る blaze 1 8 \
+(果物などの)房 bunch 0 8 \
+を向ける,投げかける cast 1 8 \
+無秩序 chaos 0 8 \
+きめの粗い coarse 2 8 \
+同時に起こる coincide 2 8 \
+開始,始業 commencement 0 8 \
+同等の,比較できる comparable 2 8 \
+~に無理やりさせる,強いる compel 1 8 \
+一致する correspond 1 8 \
+写し,相当するもの counterpart 0 8 \
+基準 criterion 0 8 \
+がれき debris 0 8 \
+行為 deed 0 8 \
+~を深める deepen 1 8 \
+~を定義する define 1 8 \
+~を落胆させる depress 1 8 \
+~を放出する discharge 1 8 \
+~を変装させる disguise 1 8 \
+混乱,無秩序 disorder 0 8 \
+多様性 diversity 0 8 \
+生態系 ecosystem 0 8 \
+~を可能にする enable 1 8 \
+~を危険にさらす endanger 1 8 \
+熱意 enthusiasm 0 8 \
+~を建築する erect 1 8 \
+明快な,はっきりした explicit 2 8 \
+さらすこと,暴露 exposure 0 8 \
+表現 expression 0 8 \
+~をしっかり固定する fasten 1 8 \
+浮かぶ float 1 8 \
+壊れやすい fragile 2 8 \
+破片 fragment 0 8 \
+非常に大きな gigantic 2 8 \
+ちらりと見えること glimpse 0 8 \
+強欲 greed 0 8 \
+厳格な grim 2 8 \
+~を止める halt 1 8 \
+ざらざらした,過酷な,きつい harsh 2 8 \
+~を急がせる hasten 1 8 \
+~に出没する,とりつく haunt 1 8 \
+遺伝 heredity 0 8 \
+~を強調する highlight 1 8 \
+錯覚 illusion 0 8 \
+不適当な,不十分な inadequate 2 8 \
+指導力 initiative 0 8 \
+中間の intermediate 2 8 \
+計り知れないほど貴重な invaluable 2 8 \
+目に見えない invisible 2 8 \
+関係のない irrelevant 2 8 \
+~をいらいらさせる irritate 1 8 \
+驚く marvel 1 8 \
+大きくて重い massive 2 8 \
+~をつぶやく mutter 1 8 \
+迷惑,やっかいもの nuisance 0 8 \
+(物質の持つ特有の)におい odor 0 8 \
+過酷な,圧制的な oppressive 2 8 \
+~を‥に適応させる orient 1 8 \
+発生,勃発 outbreak 0 8 \
+はけ口,コンセント outlet 0 8 \
+~を詳しく点検する overhaul 1 8 \
+危険 peril 0 8 \
+永続する perpetual 1 8 \
+可能性 possibility 0 8 \
+好きであること preference 0 8 \
+前提 premise 0 8 \
+栄える prosper 1 8 \
+~を...の状態にさせる render 1 8 \
+~を更新する renew 1 8 \
+どう猛な savage 2 8 \
+範囲 scope 0 8 \
+連続 sequence 0 8 \
+使い古した shabby 2 8 \
+~を粉々にする shatter 1 8 \
+全くの sheer 2 8 \
+欠点 shortcoming 0 8 \
+~を短くする shorten 1 8 \
+沈む sink 1 8 \
+球,球体 sphere 0 8 \
+安定 stability 0 8 \
+くい stake 0 8 \
+~をぎょっとさせる,驚かす startle 1 8 \
+茎 stem 0 8 \
+続いて起こる subsequent 2 8 \
+表面的な superficial 2 8 \
+退屈な tedious 2 8 \
+~を終わらせる terminate 1 8 \
+特徴 trait 0 8 \
+震える tremble 1 8 \
+最大の utmost 2 8 \
+真空 vacuum 0 8 \
+幸福 wellbeing 0 8 \
+~を加速させる accelerate 1 9 \
+~を宿泊させる accommodate 1 9 \
+~を夢中にさせる,依存させる addict 1 9 \
+通路 aisle 0 9 \
+素人 amateur 0 9 \
+心地良さ,快適さ amenity 2 9 \
+匿名の anonymous 2 9 \
+~を予想する anticipate 1 9 \
+拍手を送る applaud 1 9 \
+志願者 applicant 0 9 \
+熱烈な ardent 2 9 \
+運動選手 athlete 0 9 \
+~を達成する attain 1 9 \
+弾む bounce 1 9 \
+きびきびした brisk 2 9 \
+パンフレット brochure 0 9 \
+弾丸 bullet 0 9 \
+ぶつかる bump 1 9 \
+風刺漫画 caricature 0 9 \
+注意 caution 0 9 \
+有名人,芸能人 celebrity 0 9 \
+~をたたく clap 1 9 \
+不器用な clumsy 2 9 \
+~を隠す conceal 1 9 \
+~に直面する confront 1 9 \
+~を慰める console 1 9 \
+助言,勧告 counsel 0 9 \
+信念,信条 creed 0 9 \
+神の divine 2 9 \
+~を引っ張る drag 1 9 \
+漂う drift 1 9 \
+耐久力のある durable 2 9 \
+(力などを)発揮する exert 1 9 \
+~を想像する fancy 2 9 \
+祝宴 feast 0 9 \
+喜ばしい,栄誉ある glorious 2 9 \
+不道徳な immoral 2 9 \
+欠くことのできない indispensable 2 9 \
+洞察 insight 0 9 \
+~を取り付ける install 1 9 \
+間隔 interval 0 9 \
+入り組んだ intricate 2 9 \
+直観 intuition 0 9 \
+孤立 isolation 0 9 \
+~を正当化する justify 1 9 \
+くじ lot 0 9 \
+~を誘惑する lure 1 9 \
+明白な,はっきりした manifest 2 9 \
+男らしい masculine 2 9 \
+憂うつ melancholy 0 9 \
+力のある mighty 2 9 \
+惨めな miserable 2 9 \
+増加する,掛け算する multiply 1 9 \
+障害 obstacle 0 9 \
+結果 outcome 0 9 \
+熱烈歓迎,拍手 ovation 0 9 \
+~を追い越す overtake 1 9 \
+気晴らし,娯楽 pastime 0 9 \
+悲観的な pessimistic 2 9 \
+予備の preliminary 2 9 \
+没頭,夢中 preoccupation 0 9 \
+名声,有名 prestige 0 9 \
+下見,試写,予告篇 preview 0 9 \
+熟練した,堪能な proficient 2 9 \
+~を延長する prolong 1 9 \
+心理学者 psychologist 0 9 \
+奇妙な queer 2 9 \
+推理,論法 reasoning 0 9 \
+休み,休憩 recess 0 9 \
+向こう見ずな reckless 2 9 \
+~を勧誘する,引き入れる recruit 1 9 \
+~を登録する register 1 9 \
+喜ぶ rejoice 0 9 \
+憤慨している resentful 2 9 \
+予約 reservation 0 9 \
+なぞなぞ riddle 0 9 \
+ばかばかしい ridiculous 2 9 \
+中古の secondhand 2 9 \
+(肩を)すくめる shrug 1 9 \
+~を抜かす,飛ばす skip 1 9 \
+~をピシャリと打つ slap 1 9 \
+~を粉々に砕く smash 1 9 \
+~を分類する sort 1 9 \
+観客 spectator 0 9 \
+自発的な spontaneous 2 9 \
+~を操縦する steer 1 9 \
+刺激 stimulus 0 9 \
+~をかき回す stir 1 9 \
+~を強化する strengthen 1 9 \
+大またで歩く stride 1 9 \
+努力する strive 1 9 \
+つまずく stumble 1 9 \
+監督 supervisor 0 9 \
+(難問,難題などに)取り組む tackle 1 9 \
+~をぴんと張る,きつくする tighten 1 9 \
+~を追跡する trail 1 9 \
+賛辞,捧げ物 tribute 0 9 \
+元気はつらつとした vigorous 2 9 \
+に違反する violate 1 9 \
+実質上の,仮想の virtual 2 9 \
+一致する accord 1 10 \
+~を敬愛する adore 1 10 \
+大望 ambition 0 10 \
+反意語 antonym 0 10 \
+本物の authentic 2 10 \
+(有名人の)サイン,自署 autograph 0 10 \
+見事な awesome 2 10 \
+~を祝福する bless 1 10 \
+~を彫る carve 1 10 \
+~を(...だと)特徴づける characterize 1 10 \
+冷え冷えする chilly 1 10 \
+~を複雑にする complicate 1 10 \
+~を思い付く,想像する conceive 1 10 \
+決定的な conclusive 2 10 \
+~について思いを巡らせる contemplate 1 10 \
+~を伝達する,運ぶ convey 1 10 \
+技術,手工業 craft 0 10 \
+~をのろう curse 1 10 \
+立派な,まともな decent 2 10 \
+~を(...に)捧げる dedicate 1 10 \
+~を口述する,支配する dictate 1 10 \
+独断的な dogmatic 2 10 \
+~を編集する edit 1 10 \
+著名な eminent 2 10 \
+~を高める enhance 1 10 \
+~に権利を与える,資格を与える entitle 1 10 \
+~を(...から)消す erase 1 10 \
+倫理の ethical 2 10 \
+倫理学 ethics 0 10 \
+~を締め出す,除外する exclude 1 10 \
+非常に美しい,精巧な exquisite 2 10 \
+偽物 fake 0 10 \
+反響,意見 feedback 0 10 \
+きらきら光る glitter 2 10 \
+群れ herd 0 10 \
+中空の hollow 2 10 \
+~を照らす illuminate 1 10 \
+心が傾く,~したいと思わせる incline 1 10 \
+巧妙な,工夫に富む ingenious 2 10 \
+感化,刺激,霊感 inspiration 0 10 \
+~を通訳する interpret 1 10 \
+無責任な irresponsible 2 10 \
+専門家でない人,素人 layman 0 10 \
+壮大な,素晴らしい magnificent 2 10 \
+原稿 manuscript 0 10 \
+傑作 masterpiece 0 10 \
+めい想 meditation 0 10 \
+記憶すべき memorable 2 10 \
+隠ゆ metaphor 0 10 \
+~を部分修正する modify 1 10 \
+~を型に入れて mold 1 10 \
+神話 myth 0 10 \
+前兆 omen 0 10 \
+逆説 paradox 0 10 \
+後援者 patron 0 10 \
+香水 perfume 0 10 \
+目的を貫く,やり抜く persevere 1 10 \
+観点,遠近法 perspective 0 10 \
+悲観論者 pessimist 0 10 \
+信心深い pious 2 10 \
+肖像 portrait 0 10 \
+~を説く,説教する preach 1 10 \
+序文 preface 0 10 \
+~と考える,前提とする presume 1 10 \
+予言,お告げ prophecy 0 10 \
+散文 prose 0 10 \
+~を暗唱する recite 1 10 \
+表現,代表 representation 0 10 \
+~を再生する reproduce 1 10 \
+それぞれの respective 2 10 \
+尊敬 reverence 0 10 \
+を改訂する revise 1 10 \
+儀式 ritual 0 10 \
+腐る rot 1 10 \
+神社 shrine 0 10 \
+意義,重要性 significance 0 10 \
+厳粛な solemn 2 10 \
+孤独 solitude 0 10 \
+主観的な subjective 2 10 \
+微妙な subtle 2 10 \
+迷信 superstition 0 10 \
+迅速な swift 2 10 \
+同義語 synonym 0 10 \
+~を誘惑する tempt 1 10 \
+織物 textile 0 10 \
+主題 theme 0 10 \
+飽き飽きする tiresome 1 10 \
+苦しみ torment 0 10 \
+悲劇 tragedy 0 10 \
+~の覆いを取る unveil 1 10 \
+~を口に出す utter 1 10 \
+あいまいな,ぼんやりした vague 2 10 \
+言葉の verbal 2 10 \
+韻文 verse 0 10 \
+版 version 0 10 \
+邪悪な vicious 2 10 \
+~を思い浮かべる,画像化する visualize 1 10 \
+生き生きとした vivid 2 10 \
+魔女 witch 0 10 \
+~を崇拝する worship 1 10 \
+"
+
+    //乱数　
+    //正解して一つ除く場合、まず乱数の範囲を一つ減らす。そして、除いたやつが選ばれたら、範囲を減らした分だけ足す。
+    //
+    //やっぱリスト使う。あるリストに１から１０００まで数字入れて、問題に正解したら(選ばれたら)除外する。
+    //
+
+    let kazu = new Array()
+    let nihon = new Array()
+    let eigo = new Array()
+    let hinsi = new Array()
+    let unit = new Array()
+    var kirikae = 0
+    var iii = 0
+    var rand = 0
+    var yon
+    var einiti
+    //var saba
+    var aka
+    var select = 0
+    var seikai = 0
+    var aka_num = 0
+    var sp = 0
+    var qtext = document.getElementById("qtext")
+    var i = 0
+    var dummyrand = new Array(4)
+    var db
+    var val
+
+    function reset() {
+        window.location.reload(true);
+    }
+
+    function reset1() {
+        for (i = 0; i < 1000; i++) {
+            kazu[i] = i;
+        }
+    }
+
+    //単語と意味に分けて格納
+    function kaku() {
+
+        //切り替え用
+        kirikae = 0
+
+        yume0.split(" ").forEach(function (value) {
+
+            //日本語の格納
+            if (kirikae == 0) {
+                nihon[iii] = value
+                kirikae = 1
+            }
+            //英語
+            else if (kirikae == 1) {
+                eigo[iii] = value
+                kirikae = 2
+            }
+            //品詞
+            else if (kirikae == 2) {
+                hinsi[iii] = value
+                kirikae = 3
+            }
+            //unit
+            else if (kirikae == 3) {
+                unit[iii] = value
+                kirikae = 0
+                iii++
+            }
+        })
+
+    }
+
+    function start() {
+        document.getElementById("form").hidden = true
+        document.getElementById("sbo").hidden = true
+
+        document.getElementById("back").hidden = false
+        document.getElementById("meter").hidden = false
+        document.getElementById("qtext").hidden = false
+
+        document.getElementById("kuria").hidden = true
+        document.getElementById("endb").hidden = true
+        document.getElementById("endb2").hidden = true
+
+        yon = document.getElementById("yon").checked
+        einiti = document.getElementById("einiti").checked
+        //saba = document.getElementById("saba").checked
+        aka = document.getElementById("aka").checked
+        select = document.getElementById("select").selectedIndex
+
+        if (yon == true) {
+
+            document.getElementById("table").hidden = false
+
+        }
+        else {
+            document.getElementById("nextbo").value = "正解を表示"
+            document.getElementById("yi1").hidden = false
+            document.getElementById("yi2").hidden = false
+            document.getElementById("yi1").disabled = true
+            document.getElementById("yi2").disabled = true
+            document.getElementById("nextbo").hidden = false
+            document.getElementById("aida").hidden = false
+        }
+
+        meter(0)
+    }
+
+    function main() {
+
+        //赤か青か
+        if (aka) {
+            aka_num = 0
+        }
+        else {
+            aka_num = 1000
+        }
+
+        //全範囲
+        if (select == 0) {
+            rand = Math.floor(Math.random() * (1000 - seikai))
+        }
+
+        //ユニット指定
+        else {
+            rand = Math.floor(Math.random() * (100 - seikai)) + ((document.getElementById("select").selectedIndex) - 1) * 100
+        }
+
+        //問題文
+        if (einiti == true) {
+            qtext.innerHTML = eigo[kazu[rand] + aka_num]
+        }
+
+        else {
+            qtext.innerHTML = nihon[kazu[rand] + aka_num]
+        }
+
+        //四択
+        if (yon) {
+
+            //ダミーの初期化
+            for (i = 0; i < 4; i++) {
+                dummyrand[i] = -1;
+            }
+
+            //正解の場所
+            sp = Math.floor(Math.random() * 4)
+
+            //ダミー
+            for (i = 0; i < 4; i++) {
+
+                db = document.getElementById(i)
+
+                //正解
+                if (i == sp) {
+
+                    //文字列代入
+                    if (einiti == true) {
+                        db.value = nihon[kazu[rand] + aka_num]
+                    }
+                    else if (einiti == false) {
+                        db.value = eigo[kazu[rand] + aka_num]
+                    }
+
+                    dummyrand[i] = kazu[rand] + aka_num
+
+                }
+                else {
+
+                    //問題とダミーの品詞が同じ　&　問題とダミーの数字が異なる　まで繰り返す
+                    while (true) {
+
+                        dummyrand[i] = Math.floor(Math.random() * 1000) + aka_num
+
+                        if (dummyrand[i] == kazu[rand] + aka_num) {
+                            continue;
+                        }
+
+                        if (hinsi[kazu[rand] + aka_num] != hinsi[dummyrand[i]]) {
+                            continue;
+                        }
+
+                        if (i == 0) { }
+                        else if (i == 1) {
+                            if (dummyrand[1] == dummyrand[0]) {
+                                continue;
+                            }
+                        }
+                        else if (i == 2) {
+                            if (dummyrand[2] == dummyrand[1] || dummyrand[2] == dummyrand[0]) {
+                                continue;
+                            }
+                        }
+                        else if (i == 3) {
+                            if (dummyrand[3] == dummyrand[2] || dummyrand[3] == dummyrand[1] || dummyrand[3] == dummyrand[0]) {
+                                continue;
+                            }
+                        }
+
+                        break;
+
+                    }
+
+                    //ダミー（モードによって変える）
+                    if (einiti == true) {
+                        db.value = nihon[dummyrand[i]]
+                    }
+                    else if (einiti == false) {
+                        db.value = eigo[dummyrand[i]]
+                    }
+
+                }
+            }
+
+            console.log(kazu[rand] + aka_num)
+            console.log(dummyrand[0])
+            console.log(dummyrand[1])
+            console.log(dummyrand[2])
+            console.log(dummyrand[3])
+
+
+
+        }
+
+
+
+        if (einiti) {
+            const uttr = new SpeechSynthesisUtterance();
+            uttr.text = document.getElementById('qtext').innerHTML
+            uttr.lang = 'en-US';
+            speechSynthesis.speak(uttr);
+        }
+
+    }
+
+    function qbc(osita) {
+
+        if (osita == sp) {
+            color_reset()
+            seikai++
+            kazu.splice(rand, 1)
+            meter(seikai)
+            if (select == 0) {
+                if (seikai == 1000) {
+                    document.getElementById("qtext").hidden = true
+                    document.getElementById("table").hidden = true
+                    document.getElementById("yi1").hidden = true
+                    document.getElementById("yi2").hidden = true
+                    document.getElementById("nextbo").hidden = true
+                    document.getElementById("kuria").hidden = false
+                    document.getElementById("endb").hidden = false
+                    document.getElementById("endb2").hidden = false
+
+                    document.getElementById("kuria").innerHTML = "クリア"
+                }
+            }
+            else {
+                if (seikai == 100) {
+                    document.getElementById("qtext").hidden = true
+                    document.getElementById("table").hidden = true
+                    document.getElementById("yi1").hidden = true
+                    document.getElementById("yi2").hidden = true
+                    document.getElementById("nextbo").hidden = true
+                    document.getElementById("kuria").hidden = false
+                    document.getElementById("endb").hidden = false
+                    document.getElementById("endb2").hidden = false
+
+                    document.getElementById("kuria").innerHTML = "クリア"
+                }
+            }
+
+            main()
+        }
+
+        else {
+
+            // if (saba) {
+            //      document.getElementById("qtext").hidden = true
+            //     document.getElementById("table").hidden = true
+            //     document.getElementById("yi1").hidden = true
+            //     document.getElementById("yi2").hidden = true
+            //     document.getElementById("nextbo").hidden = true
+            //     document.getElementById("kuria").hidden = false
+            //     document.getElementById("endb").hidden = false
+            //     document.getElementById("endb2").hidden = false
+
+            //     document.getElementById("kuria").innerHTML = "失敗"
+            // }
+
+            // else {
+
+            document.getElementById("nextbo").hidden = false
+
+            for (i = 0; i < 4; i++) {
+
+                document.getElementById(i).disabled = true
+
+                if (i == sp) {
+                    val = document.getElementById(sp).value
+                    val = "◯ " + val
+                    document.getElementById(sp).value = val
+                    document.getElementById(sp).style.color = "green"
+                }
+                else if (i == osita) {
+                    val = document.getElementById(i).value
+                    val = "☓ " + val
+                    document.getElementById(i).value = val
+                    document.getElementById(i).style.color = "red"
+                }
+            }
+            // }
+        }
+    }
+
+    function meter(n) {
+        if (select == 0) {
+            document.getElementById("meter").innerHTML = n + "/1000"
+        }
+        else {
+            document.getElementById("meter").innerHTML = n + "/100"
+        }
+    }
+
+    function color_reset() {
+        for (let i = 0; i < 4; i++) {
+            document.getElementById(i).style.color = "black"
+            document.getElementById(i).disabled = false
+        }
+    }
+
+    function next() {
+
+        if (yon) {
+            color_reset()
+            document.getElementById("nextbo").hidden = true
+            main()
+        }
+
+        else {
+            document.getElementById("nextbo").disabled = true
+            document.getElementById("yi1").disabled = false
+            document.getElementById("yi2").disabled = false
+
+            if (einiti == true) {
+                qtext.innerHTML = nihon[kazu[rand] + aka_num]
+            }
+
+            else {
+                qtext.innerHTML = eigo[kazu[rand] + aka_num]
+            }
+        }
+    }
+
+    function iti(bo) {
+        if (bo == "yi1") {
+            document.getElementById("nextbo").disabled = false
+            document.getElementById("yi1").disabled = true
+            document.getElementById("yi2").disabled = true
+            kazu.splice(rand, 1)
+            seikai++
+            meter(seikai)
+            main()
+        }
+
+        else {
+            //   if (saba) {
+            //       document.getElementById("qtext").hidden = true
+            //       document.getElementById("yi1").hidden = true
+            //       document.getElementById("yi2").hidden = true
+            //      document.getElementById("nextbo").hidden = true
+            //      document.getElementById("kuria").hidden = false
+            //      document.getElementById("endb").hidden = false
+            //      document.getElementById("endb2").hidden = false
+            //      document.getElementById("kuria").innerHTML = "失敗"
+            //   }
+
+            //   else {
+            document.getElementById("nextbo").disabled = false
+            document.getElementById("yi1").disabled = true
+            document.getElementById("yi2").disabled = true
+            main()
+            //   }
+        }
+    }
+
+</script>
+
+</html>
